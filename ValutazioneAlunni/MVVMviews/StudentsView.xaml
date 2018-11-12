@@ -7,6 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450"
              d:DesignWidth="800">
+  
   <Grid>
     <Grid.RowDefinitions>
       <RowDefinition></RowDefinition>
@@ -18,9 +19,9 @@
 
     <StackPanel Orientation="Vertical"
                 Width="200">
-      <Label Content="Studenti:"
-             Foreground="#FFE0E0E0"/>
-      <ListBox ItemsSource="{Binding Students}">
+      <Label Content="Studenti:"/>
+      <ListBox ItemsSource="{Binding Students}"
+               >
       </ListBox>
     </StackPanel>
 

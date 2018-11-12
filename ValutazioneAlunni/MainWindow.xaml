@@ -8,8 +8,6 @@
         Title="MainWindow" 
         Width="800"
         Height="600"
-        Background="#FF202020"
-        Foreground="#FFE0E0E0"
         WindowStartupLocation="CenterScreen">
   
     <Grid x:Name="MainGrid" Margin="3">
@@ -24,7 +22,7 @@
 
       <!-- working folder -->
       <Grid Grid.Row="0" Grid.Column="0"
-            Margin="3">
+            Margin="5">
         <Grid.RowDefinitions>
           <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
@@ -35,13 +33,11 @@
         </Grid.ColumnDefinitions>
 
         <Label Content="Cartella di lavoro"
-               Foreground="#FFE0E0E0"
                Grid.Column="0"/>
         <TextBlock Text="{Binding WorkingFolder}"
                    Margin="5,0,5,0"
                    HorizontalAlignment="Stretch"
-                   Foreground="#FF000000"
-                   Background="#FFE0E0E0"
+                   Background="#FFFFFFE0"                   
                    Grid.Column="1"/>
         <Button Content="Cambia..." 
                 HorizontalAlignment="Right"
@@ -50,9 +46,10 @@
       
       <!-- tabs -->
       <TabControl Grid.Row="1" Grid.Column="0"
-                  Margin="3">
+                  Margin="5">
 
-        <TabItem x:Name="TabStudents" Header="Valutazione studenti">
+        <TabItem x:Name="TabStudents" 
+                 Header="Valutazione studenti">
           <Grid x:Name="TabStudentsContainer"/>
         </TabItem>
 
