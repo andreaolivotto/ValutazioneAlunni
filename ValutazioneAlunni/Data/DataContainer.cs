@@ -206,6 +206,7 @@ namespace ValutazioneAlunni.Data
     private void data_students_load_fake_data()
     {
       StudentData sd;
+      StudentEvaluationItem ei;
 
       _log.Info("Anagrafica studenti, caricamento dati fittizi");
 
@@ -218,6 +219,16 @@ namespace ValutazioneAlunni.Data
       sd.LastName = "Rossi";
       sd.BirthDate = new DateTime(2015, 2, 23);
       sd.EvaluationItems = new List<StudentEvaluationItem>();
+      ei = new StudentEvaluationItem();
+      ei.Tag = StudentEvaluationItem.EncodeTag(0, 0);
+      ei.EvalNumber = 1;
+      ei.LastChange = DateTime.Now;
+      sd.EvaluationItems.Add(ei);
+      ei = new StudentEvaluationItem();
+      ei.Tag = StudentEvaluationItem.EncodeTag(0, 1);
+      ei.EvalNumber = 2;
+      ei.LastChange = DateTime.Now;
+      sd.EvaluationItems.Add(ei);
       list_of_students.Add(sd);
 
       sd = new StudentData();
@@ -228,6 +239,16 @@ namespace ValutazioneAlunni.Data
       sd.BirthDate = new DateTime(2016, 6, 5);
       sd.Note = "Potrebbe fare meglio.";
       sd.EvaluationItems = new List<StudentEvaluationItem>();
+      ei = new StudentEvaluationItem();
+      ei.Tag = StudentEvaluationItem.EncodeTag(0, 0);
+      ei.EvalNumber = 3;
+      ei.LastChange = DateTime.Now;
+      sd.EvaluationItems.Add(ei);
+      ei = new StudentEvaluationItem();
+      ei.Tag = StudentEvaluationItem.EncodeTag(0, 1);
+      ei.EvalNumber = 4;
+      ei.LastChange = DateTime.Now;
+      sd.EvaluationItems.Add(ei);
       list_of_students.Add(sd);
 
       sd = new StudentData();

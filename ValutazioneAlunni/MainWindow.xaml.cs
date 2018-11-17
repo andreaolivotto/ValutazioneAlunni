@@ -69,11 +69,11 @@ namespace ValutazioneAlunni
     {
       MainGrid.DataContext = new MainViewModel();
 
-      TabStudentsContainer.DataContext = new StudentsViewModel();
       TabStudentsContainer.Children.Add(new StudentsView());
+      TabStudentsContainer.DataContext = new StudentsViewModel();
 
-      TabEvaluationSchemeContainer.DataContext = new EvaluationSchemeViewModel();
       TabEvaluationSchemeContainer.Children.Add(new EvaluationSchemeView());
+      TabEvaluationSchemeContainer.DataContext = new EvaluationSchemeViewModel();
     }
   }
 }

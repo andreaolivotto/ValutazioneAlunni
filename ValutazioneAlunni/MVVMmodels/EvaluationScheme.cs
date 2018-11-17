@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace ValutazioneAlunni.MVVMmodels
 {
@@ -11,6 +12,41 @@ namespace ValutazioneAlunni.MVVMmodels
   {
     public int Level;
     public string Description;
+
+    public static string GetLevelDescription(int level)
+    {
+      switch (level)
+      {
+        case 1:
+          return "Iniziale";
+        case 2:
+          return "Base";
+        case 3:
+          return "Intermedio";
+        case 4:
+          return "Avanzato";
+        default:
+          return "ERR";
+      }
+    }
+
+    public static Color GetLevelColor(int level)
+    {
+      switch (level)
+      {
+        case 1:
+          return Color.FromRgb(247, 153, 157);
+        case 2:
+          return Color.FromRgb(255, 209, 168);
+        case 3:
+          return Color.FromRgb(250, 255, 78);
+        case 4:
+          return Color.FromRgb(158, 255, 112);
+        default:
+          return Color.FromRgb(244, 244, 244);
+      }
+    }
+
   }
 
   [Serializable]

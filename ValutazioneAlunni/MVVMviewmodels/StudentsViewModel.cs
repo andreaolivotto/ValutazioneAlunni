@@ -81,6 +81,7 @@ namespace ValutazioneAlunni.MVVMviewmodels
     {
       if (Students == null) return;
       if (Students.Count == 0) return;
+
       SelectedStudent = Students[0];
     }
 
@@ -96,6 +97,11 @@ namespace ValutazioneAlunni.MVVMviewmodels
     {
       messenger_send_set_evaluation_scheme();
       messenger_send_set_student();
+    }
+
+    private void student_save()
+    {
+      _log.Info("Salva dati studente <" + _selected_student + ">");
     }
 
     #endregion
@@ -242,13 +248,13 @@ namespace ValutazioneAlunni.MVVMviewmodels
 
     private bool CanSave()
     {
+      if (_selected_student == null) return false;
       return true;
     }
 
     private void SaveObject()
     {
-      // TODO
-      _log.Info("Salva dati studente");
+      student_save();
     }
 
     #endregion
