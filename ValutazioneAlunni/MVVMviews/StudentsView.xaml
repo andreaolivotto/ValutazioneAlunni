@@ -6,24 +6,60 @@
              xmlns:local="clr-namespace:ValutazioneAlunni.MVVMviews"
              mc:Ignorable="d" 
              d:DesignHeight="450"
-             d:DesignWidth="800">
+             d:DesignWidth="600">
   
   <Grid>
     <Grid.RowDefinitions>
-      <RowDefinition></RowDefinition>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition/>
     </Grid.RowDefinitions>
     <Grid.ColumnDefinitions>
-      <ColumnDefinition Width="Auto"></ColumnDefinition>
-      <ColumnDefinition></ColumnDefinition>
+      <ColumnDefinition Width="200"/>
+      <ColumnDefinition/>
     </Grid.ColumnDefinitions>
 
-    <StackPanel Orientation="Vertical"
-                Width="200">
-      <Label Content="Studenti:"/>
-      <ListBox ItemsSource="{Binding Students}"
-               >
-      </ListBox>
-    </StackPanel>
+    <Label Content="Studenti:"
+           Grid.Column="0" Grid.Row="0"/>
+    <ListView ItemsSource="{Binding Students}"
+              SelectedItem="{Binding SelectedStudent}"
+              Grid.Column="0" Grid.Row="1"
+              VerticalAlignment="Stretch"
+              VerticalContentAlignment="Stretch"
+              ScrollViewer.VerticalScrollBarVisibility="Visible"/>
+
+    <!-- detail -->
+    <Grid Margin="10,0,0,0" Grid.Column="1" Grid.Row="1" Background="White">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition/>
+        <RowDefinition Height="Auto"/>
+      </Grid.RowDefinitions>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="120"/>
+        <ColumnDefinition/>
+      </Grid.ColumnDefinitions>
+
+      <Label Content="Nome:" Grid.Row="0" Grid.Column="0" Style="{StaticResource TextFieldLabel_Style}"/>
+      <TextBox Text="{Binding FirstName}" Grid.Row="0" Grid.Column="1" Style="{StaticResource TextFieldValue_Style}"/>
+
+      <Label Content="Cognome:" Grid.Row="1" Grid.Column="0" Style="{StaticResource TextFieldLabel_Style}"/>
+      <TextBox Text="{Binding LastName}" Grid.Row="1" Grid.Column="1" Style="{StaticResource TextFieldValue_Style}"/>
+
+      <Label Content="Data di nascita:" Grid.Row="2" Grid.Column="0" Style="{StaticResource TextFieldLabel_Style}"/>
+      <!--<TextBox Text="{Binding BirthDate}" Grid.Row="2" Grid.Column="1" Style="{StaticResource TextFieldValue_Style}"/>-->
+      <DatePicker SelectedDate="{Binding BirthDate}" Grid.Row="2" Grid.Column="1" Style="{StaticResource DateFieldValue_Style}"/>
+
+      <Label Content="Note:" Grid.Row="3" Grid.Column="0" Style="{StaticResource TextFieldLabel_Style}"/>
+      <TextBox Text="{Binding Note}" Grid.Row="3" Grid.Column="1" Style="{StaticResource TextMultilineFieldValue_Style}"/>
+
+      <Button Content="Salva" 
+              Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"
+              Style="{StaticResource BaseButton_Style}"
+              Command="{Binding SaveCmd}"/>
+    </Grid>
 
   </Grid>
   

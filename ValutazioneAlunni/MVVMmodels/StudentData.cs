@@ -21,14 +21,15 @@ namespace ValutazioneAlunni.MVVMmodels
     public string EvaluationSchemeDate;
 
     public string FirstName;
-    public string Surname;
+    public string LastName;
     public DateTime BirthDate;
+    public string Note;
 
     public List<StudentEvaluationItem> EvaluationItems;
 
     public override string ToString()
     {
-      return Surname + " " + FirstName;
+      return LastName + " " + FirstName;
     }
   }
 }

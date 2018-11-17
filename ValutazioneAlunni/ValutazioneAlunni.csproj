@@ -57,6 +57,7 @@
     </ApplicationDefinition>
     <Compile Include="MVVMmodels\ApplicationSettings.cs" />
     <Compile Include="MVVMutils\RelayCommand.cs" />
+    <Compile Include="MVVMutils\WPFMessengerClass.cs" />
     <Compile Include="MVVMviewmodels\BaseViewModel.cs" />
     <Compile Include="MVVMviewmodels\MainViewModel.cs" />
     <Compile Include="MVVMviewmodels\EvaluationSchemeViewModel.cs" />
@@ -86,6 +87,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MVVMviews\StudentsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\Style1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

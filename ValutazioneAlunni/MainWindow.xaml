@@ -32,16 +32,16 @@
           <ColumnDefinition Width="Auto"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <Label Content="Cartella di lavoro"
-               Grid.Column="0"/>
-        <TextBlock Text="{Binding WorkingFolder}"
-                   Margin="5,0,5,0"
-                   HorizontalAlignment="Stretch"
-                   Background="#FFFFFFE0"                   
-                   Grid.Column="1"/>
+        <Label Content="Cartella di lavoro:"
+               Grid.Column="0"
+               Style="{StaticResource TextFieldLabel_Style}"/>
+        <TextBox Text="{Binding WorkingFolder}"
+                 Grid.Column="1"
+                 Style="{StaticResource TextFieldValue_Style}"/>
         <Button Content="Cambia..." 
-                HorizontalAlignment="Right"
-                Grid.Column="2"/>
+                Grid.Column="2"
+                Margin="5,0,0,0"
+                Style="{StaticResource BaseButton_Style}"/>
       </Grid>
       
       <!-- tabs -->
