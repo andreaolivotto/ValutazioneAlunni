@@ -101,7 +101,16 @@ namespace ValutazioneAlunni.MVVMviewmodels
 
     private void student_save()
     {
-      _log.Info("Salva dati studente <" + _selected_student + ">");
+      try
+      {
+        if (_selected_student == null) return;
+
+        _log.Info("Salva dati studente <" + _selected_student + ">");
+      }
+      catch (Exception exc)
+      {
+        _log.Error("Exception in student_save(): " + exc.Message);
+      }
     }
 
     #endregion
@@ -238,7 +247,7 @@ namespace ValutazioneAlunni.MVVMviewmodels
         if (_save_cmd == null)
         {
           _save_cmd = new RelayCommand(
-              param => this.SaveObject(),
+              param => this.Save(),
               param => this.CanSave()
               );
         }
@@ -252,7 +261,7 @@ namespace ValutazioneAlunni.MVVMviewmodels
       return true;
     }
 
-    private void SaveObject()
+    private void Save()
     {
       student_save();
     }

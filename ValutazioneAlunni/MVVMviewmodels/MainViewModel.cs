@@ -30,16 +30,15 @@ namespace ValutazioneAlunni.MVVMviewmodels
 
     #region public properties
 
-    private string _working_folder = "";
     public string WorkingFolder
     {
       get
       {
-        return _working_folder;
+        return _settings.WorkingFolder;
       }
       set
       {
-        _working_folder = value;
+        _settings.WorkingFolder = value;
         RaisePropertyChanged("WorkingFolder");
       }
     }

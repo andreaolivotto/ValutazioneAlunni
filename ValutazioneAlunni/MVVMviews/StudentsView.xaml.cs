@@ -33,12 +33,18 @@ namespace ValutazioneAlunni.MVVMviews
 
     #endregion
 
+    #region init and deinit 
+
     public StudentsView()
     {
       InitializeComponent();
 
       messenger_init();
     }
+
+    #endregion
+
+    #region messenger
 
     private void messenger_init()
     {
@@ -63,6 +69,10 @@ namespace ValutazioneAlunni.MVVMviews
       _student = student;
       on_set_student();
     }
+
+    #endregion
+
+    #region provate functions
 
     private void on_set_evaluation_scheme()
     {
@@ -212,5 +222,7 @@ namespace ValutazioneAlunni.MVVMviews
         }
       }
     }
+
+    #endregion
   }
 }

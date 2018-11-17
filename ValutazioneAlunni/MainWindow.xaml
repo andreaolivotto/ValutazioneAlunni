@@ -37,6 +37,7 @@
                Style="{StaticResource TextFieldLabel_Style}"/>
         <TextBox Text="{Binding WorkingFolder}"
                  Grid.Column="1"
+                 IsReadOnly="True"
                  Style="{StaticResource TextFieldValue_Style}"/>
         <Button Content="Cambia..." 
                 Grid.Column="2"
