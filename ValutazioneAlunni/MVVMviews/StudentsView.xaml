@@ -55,10 +55,18 @@
       <Label Content="Note:" Grid.Row="3" Grid.Column="0" Style="{StaticResource TextFieldLabel_Style}"/>
       <TextBox Text="{Binding Note}" Grid.Row="3" Grid.Column="1" Style="{StaticResource TextMultilineFieldValue_Style}"/>
 
+      <ScrollViewer Grid.Row="4" Grid.Column="1"
+                    Margin="3,15,3,3"
+                    VerticalScrollBarVisibility="Visible">
+        <Grid x:Name="grdEvaluationScheme">
+        </Grid>
+      </ScrollViewer>
+
       <Button Content="Salva" 
               Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"
               Style="{StaticResource BaseButton_Style}"
               Command="{Binding SaveCmd}"/>
+      
     </Grid>
 
   </Grid>

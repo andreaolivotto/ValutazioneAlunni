@@ -29,6 +29,20 @@ namespace ValutazioneAlunni.MVVMviewmodels
 
     #endregion
 
+    #region messenger
+
+    private void messenger_send_set_evaluation_scheme()
+    {
+      Messenger.Default.Send(DataContainer.Instance.EvaluationScheme, "SetEvaluationScheme");
+    }
+
+    private void messenger_send_set_student()
+    {
+      Messenger.Default.Send(_selected_student, "SetCurrentStudent");
+    }
+
+    #endregion
+
     #region private functions
 
     private void students_init()
@@ -78,6 +92,12 @@ namespace ValutazioneAlunni.MVVMviewmodels
       RaisePropertyChanged("Note");
     }
 
+    private void on_student_selection()
+    {
+      messenger_send_set_evaluation_scheme();
+      messenger_send_set_student();
+    }
+
     #endregion
 
     #region public properties
@@ -111,6 +131,7 @@ namespace ValutazioneAlunni.MVVMviewmodels
         if (value != _selected_student)
         {
           _selected_student = value;
+          on_student_selection();
         }
         studens_refresh_detail_data();
         RaisePropertyChanged("SelectedStudent");

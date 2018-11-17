@@ -53,6 +53,7 @@ namespace ValutazioneAlunni.MVVMmodels
   {
     public string Name;         // Dimensione
     public string Description;  // Indicatore di competenza
+    public int Index;
     public List<EvaluationSection> Sections;
 
     public override string ToString()

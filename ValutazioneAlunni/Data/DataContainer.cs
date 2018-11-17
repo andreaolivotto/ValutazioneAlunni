@@ -73,6 +73,7 @@ namespace ValutazioneAlunni.Data
 
     private void data_evaluation_scheme_load_fake_data()
     {
+      int chapter_idx;
       EvaluationChapter chapter;
       EvaluationSection sec;
       EvaluationLevel it;
@@ -85,10 +86,13 @@ namespace ValutazioneAlunni.Data
       scheme.DatePubblication = new DateTime(2018, 11, 17);
       scheme.Notes = "Fake data";
       scheme.Chapters = new List<EvaluationChapter>();
+      chapter_idx = 1;
 
       chapter = new EvaluationChapter();
       chapter.Name = "Il sé e l’altro";
       chapter.Description = "Frequentando la scuola, il bambino ha l’opportunità di ampliare il mondo delle proprie relazioni e può così sviluppare meglio le sue “capacità non soltanto di stare genericamente con gli altri, ma anche di comprendere, condividere, aiutare e cooperare”. Le diverse esperienze che riguardano “il sé e l’altro” si intrecciano con le attività degli altri campi e tendono allo sviluppo affettivo ed emotivo, sociale, etico morale e di un corretto atteggiamento nei confronti della religiosità e delle religioni.";
+      chapter.Index = chapter_idx;
+      chapter_idx++;
       chapter.Sections = new List<EvaluationSection>();
       sec = new EvaluationSection();
       sec.Name = "Sviluppo dell’identità e dell’autonomia personale";
@@ -139,6 +143,8 @@ namespace ValutazioneAlunni.Data
       chapter = new EvaluationChapter();
       chapter.Name = "Il corpo e il movimento";
       chapter.Description = "Il corpo è il primo medium dell’apprendimento. Attraverso il corpo il bambino impara a prendere consapevolezza della realtà che lo circonda nello spazio, a relazionarsi con la realtà esterna, a esprimere i suoi sentimenti (gioia, tristezza, paura, dolore , affetto...). In breve: a conoscere e a comunicare.";
+      chapter.Index = chapter_idx;
+      chapter_idx++;
       chapter.Sections = new List<EvaluationSection>();
       sec = new EvaluationSection();
 
@@ -163,6 +169,8 @@ namespace ValutazioneAlunni.Data
       it.Description = "Ha interiorizzato e consolidato la routine scolastica; ha cura del proprio corpo. Sa vestirsi e svestirsi manifestando la capacità di autoregolazione termica, abbottonare e sbottonare, allacciare e slacciare. Mangia correttamente e sa stare seduto composto, aiuta gli altri e sa dar loro corrette indicazioni di comportamento.";
       sec.Levels.Add(it);
       chapter.Sections.Add(sec);
+
+      scheme.Chapters.Add(chapter);
 
       EvaluationScheme = scheme;
 
