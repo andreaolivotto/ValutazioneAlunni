@@ -15,6 +15,7 @@
   <Style x:Key="TextMultilineFieldValue_Style" BasedOn="{StaticResource TextFieldValue_Style}"  TargetType="TextBox">
     <Setter Property="VerticalScrollBarVisibility" Value="Visible"/>
     <Setter Property="Height" Value="140"/>
+    <Setter Property="TextWrapping" Value="Wrap"/>
   </Style>
 
   <Style x:Key="DateFieldValue_Style" TargetType="DatePicker">

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ValutazioneAlunni.Data;
 using ValutazioneAlunni.MVVMmodels;
 
 namespace ValutazioneAlunni.MVVMviewmodels
@@ -19,8 +20,11 @@ namespace ValutazioneAlunni.MVVMviewmodels
 
     public MainViewModel()
     {
-      
     }
+
+    #endregion
+
+    #region private functions
 
     #endregion
 

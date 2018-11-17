@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ValutazioneAlunni.Data;
 using ValutazioneAlunni.MVVMmodels;
 using ValutazioneAlunni.MVVMviewmodels;
 using ValutazioneAlunni.MVVMviews;
@@ -42,6 +43,7 @@ namespace ValutazioneAlunni
       _log.Info(Title);
 
       settings_init();
+      data_init();
       mvvm_init();
 
       _log.Info("Settings:");
@@ -58,6 +60,11 @@ namespace ValutazioneAlunni
       _settings = ApplicationSettings.Instance;
     }
 
+    private void data_init()
+    {
+      DataContainer.Instance.LoadFakeData();
+    }
+
     private void mvvm_init()
     {
       MainGrid.DataContext = new MainViewModel();
@@ -66,6 +73,7 @@ namespace ValutazioneAlunni
       TabStudentsContainer.Children.Add(new StudentsView());
 
       TabEvaluationSchemeContainer.DataContext = new EvaluationSchemeViewModel();
+      TabEvaluationSchemeContainer.Children.Add(new EvaluationSchemeView());
     }
   }
 }

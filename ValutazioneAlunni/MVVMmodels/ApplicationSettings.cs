@@ -56,6 +56,8 @@ namespace ValutazioneAlunni.MVVMmodels
       return sb.ToString();
     }
 
+    #region private functions
+
     private static void load_default_values()
     {
       WorkingFolder = Utils.GetApplicationPath();
@@ -121,5 +123,7 @@ namespace ValutazioneAlunni.MVVMmodels
         return "";
       }
     }
+
+    #endregion
   }
 }
