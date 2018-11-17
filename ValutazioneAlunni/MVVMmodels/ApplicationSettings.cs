@@ -22,7 +22,7 @@ namespace ValutazioneAlunni.MVVMmodels
     private static ApplicationSettings _instance = null;
     private static readonly object _padlock = new object();
 
-    ApplicationSettings()
+    private ApplicationSettings()
     {
     }
 

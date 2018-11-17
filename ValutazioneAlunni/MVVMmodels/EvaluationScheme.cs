@@ -8,7 +8,7 @@ using System.Windows.Media;
 namespace ValutazioneAlunni.MVVMmodels
 {
   [Serializable]
-  class EvaluationLevel
+  public class EvaluationLevel
   {
     public int Level;
     public string Description;
@@ -50,7 +50,7 @@ namespace ValutazioneAlunni.MVVMmodels
   }
 
   [Serializable]
-  class EvaluationSection
+  public class EvaluationSection
   {
     public string Name;         // Dimensione
     public string Description;  // Indicatore di competenza
@@ -85,11 +85,10 @@ namespace ValutazioneAlunni.MVVMmodels
   }
 
   [Serializable]
-  class EvaluationChapter
+  public class EvaluationChapter
   {
     public string Name;         // Dimensione
     public string Description;  // Indicatore di competenza
-    public int Index;
     public List<EvaluationSection> Sections;
 
     public override string ToString()
@@ -121,7 +120,7 @@ namespace ValutazioneAlunni.MVVMmodels
   }
 
   [Serializable]
-  class EvaluationScheme
+  public class EvaluationScheme
   {
     public string Release;
     public DateTime DatePubblication;
