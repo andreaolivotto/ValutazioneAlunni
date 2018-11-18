@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 using ValutazioneAlunni.MVVMmodels;
 using ValutazioneAlunni.Utilities;
 
@@ -14,6 +16,7 @@ namespace ValutazioneAlunni.Data
     #region private variables
 
     private static Log _log = Log.Instance;
+    private ApplicationSettings _settings = ApplicationSettings.Instance;
 
     // http://csharpindepth.com/Articles/General/Singleton.aspx
     private static DataContainer instance = null;
@@ -63,15 +66,79 @@ namespace ValutazioneAlunni.Data
 
     public void LoadFakeData()
     {
-      data_evaluation_scheme_load_fake_data();
-      data_students_load_fake_data();
+      //evaluation_scheme_load_fake_data();
+      evaluation_scheme_load_from_file();
+
+      //students_load_fake_data();
     }
 
     #endregion
 
     #region private functions
 
-    private void data_evaluation_scheme_load_fake_data()
+    private string evaluation_scheme_get_file_name()
+    {
+      return "RubricaValutativa_rev0.2.xml";
+    }
+
+    private bool evaluation_scheme_load_from_file()
+    {
+      try
+      {
+        _log.Info("Caricamento rubrica valutativa...");
+
+        string complete_file_name = Path.Combine(_settings.WorkingFolder, evaluation_scheme_get_file_name());
+        _log.Info("File: " + complete_file_name);
+
+        XmlSerializer serializer = new XmlSerializer(typeof(EvaluationScheme));
+        FileStream file_stream = new FileStream(complete_file_name, FileMode.Open);
+
+        EvaluationScheme = (EvaluationScheme)serializer.Deserialize(file_stream);
+
+        _log.Info("Release           : " + EvaluationScheme.Release);
+        _log.Info("Data pubblicazione: " + EvaluationScheme.DatePubblication);
+        _log.Info("Note              : " + EvaluationScheme.Notes);
+        _log.Info("Capitoli          : " + EvaluationScheme.Chapters.Count);
+
+        _log.Info("...Ok!");
+        return true;
+      }
+      catch (Exception exc)
+      {
+        _log.Error("Exception in data_evaluation_scheme_load_from_file(): " + exc.Message);
+        return false;
+      }
+    }
+
+    private bool evaluation_scheme_save_to_file()
+    {
+      try
+      {
+        _log.Info("Salvataggio rubrica valutativa...");
+        if (EvaluationScheme == null)
+        {
+          _log.Error("Errore, rubrica valutativa vuota!");
+          return false;
+        }
+
+        string complete_file_name = Path.Combine(_settings.WorkingFolder, evaluation_scheme_get_file_name());
+        _log.Info("File: " + complete_file_name);
+
+        XmlSerializer serializer = new XmlSerializer(typeof(EvaluationScheme));
+        StreamWriter file_writer = new StreamWriter(complete_file_name);
+        serializer.Serialize(file_writer, EvaluationScheme);
+        file_writer.Close();
+        _log.Info("...Ok!");
+        return true;
+      }
+      catch (Exception exc)
+      {
+        _log.Error("Exception in evaluation_scheme_save_to_file(): " + exc.Message);
+        return false;
+      }
+    }
+
+    private void evaluation_scheme_load_fake_data()
     {
       EvaluationChapter chapter;
       EvaluationSection sec;
@@ -197,55 +264,55 @@ namespace ValutazioneAlunni.Data
       //chapter.Sections.Add(sec);
     }
 
-    private void data_students_load_fake_data()
+    private void students_load_fake_data()
     {
       StudentData sd;
-      StudentEvaluationItem ei;
+      //StudentEvaluationItem ei;
 
       _log.Info("Anagrafica studenti, caricamento dati fittizi");
 
       ObservableCollection<StudentData> list_of_students = new ObservableCollection<StudentData>();
 
-      sd = new StudentData();
+      sd = new StudentData(DataContainer.Instance.EvaluationScheme);
       sd.EvaluationSchemeDate = "FAKEDATA";
       sd.EvaluationSchemeRelease = "0.1";
       sd.FirstName = "Mario";
       sd.LastName = "Rossi";
       sd.BirthDate = new DateTime(2015, 2, 23);
-      sd.EvaluationItems = new List<StudentEvaluationItem>();
-      ei = new StudentEvaluationItem();
-      ei.Tag = StudentEvaluationItem.EncodeTag(0, 0);
-      ei.EvalNumber = 1;
-      ei.LastChange = DateTime.Now;
-      sd.EvaluationItems.Add(ei);
-      ei = new StudentEvaluationItem();
-      ei.Tag = StudentEvaluationItem.EncodeTag(0, 1);
-      ei.EvalNumber = 2;
-      ei.LastChange = DateTime.Now;
-      sd.EvaluationItems.Add(ei);
+      //sd.EvaluationItems = new List<StudentEvaluationItem>();
+      //ei = new StudentEvaluationItem();
+      //ei.Tag = StudentEvaluationItem.EncodeTag(0, 0);
+      //ei.EvalNumber = 1;
+      //ei.LastChange = DateTime.Now;
+      //sd.EvaluationItems.Add(ei);
+      //ei = new StudentEvaluationItem();
+      //ei.Tag = StudentEvaluationItem.EncodeTag(0, 1);
+      //ei.EvalNumber = 2;
+      //ei.LastChange = DateTime.Now;
+      //sd.EvaluationItems.Add(ei);
       list_of_students.Add(sd);
 
-      sd = new StudentData();
+      sd = new StudentData(DataContainer.Instance.EvaluationScheme);
       sd.EvaluationSchemeDate = "FAKEDATA";
       sd.EvaluationSchemeRelease = "0.1";
       sd.FirstName = "Gianni";
       sd.LastName = "Bianchi";
       sd.BirthDate = new DateTime(2016, 6, 5);
       sd.Note = "Potrebbe fare meglio.";
-      sd.EvaluationItems = new List<StudentEvaluationItem>();
-      ei = new StudentEvaluationItem();
-      ei.Tag = StudentEvaluationItem.EncodeTag(0, 0);
-      ei.EvalNumber = 3;
-      ei.LastChange = DateTime.Now;
-      sd.EvaluationItems.Add(ei);
-      ei = new StudentEvaluationItem();
-      ei.Tag = StudentEvaluationItem.EncodeTag(0, 1);
-      ei.EvalNumber = 4;
-      ei.LastChange = DateTime.Now;
-      sd.EvaluationItems.Add(ei);
+      //sd.EvaluationItems = new List<StudentEvaluationItem>();
+      //ei = new StudentEvaluationItem();
+      //ei.Tag = StudentEvaluationItem.EncodeTag(0, 0);
+      //ei.EvalNumber = 3;
+      //ei.LastChange = DateTime.Now;
+      //sd.EvaluationItems.Add(ei);
+      //ei = new StudentEvaluationItem();
+      //ei.Tag = StudentEvaluationItem.EncodeTag(0, 1);
+      //ei.EvalNumber = 4;
+      //ei.LastChange = DateTime.Now;
+      //sd.EvaluationItems.Add(ei);
       list_of_students.Add(sd);
 
-      sd = new StudentData();
+      sd = new StudentData(DataContainer.Instance.EvaluationScheme);
       sd.EvaluationSchemeDate = "FAKEDATA";
       sd.EvaluationSchemeRelease = "0.1";
       sd.FirstName = "Marco";
@@ -256,6 +323,49 @@ namespace ValutazioneAlunni.Data
       list_of_students.Add(sd);
 
       Students = list_of_students;
+    }
+
+    private bool is_student_file(string file_name)
+    {
+      if (file_name.StartsWith("student_"))
+      {
+        return true;
+      }
+      return false;
+    }
+
+    private bool students_load_from_file()
+    {
+      try
+      {
+        _log.Info("Caricamento dati studenti...");
+
+        _log.Info("Cartella di lavoro: " + _settings.WorkingFolder);
+
+        string[] files = Directory.GetFiles(_settings.WorkingFolder);
+
+        XmlSerializer serializer = new XmlSerializer(typeof(StudentData));
+        foreach (string f in files)
+        {
+          if (is_student_file(f))
+          {
+            // Load student
+            string complete_file_name = Path.Combine(_settings.WorkingFolder, f);
+            FileStream file_stream = new FileStream(complete_file_name, FileMode.Open);
+            StudentData s = (StudentData)serializer.Deserialize(file_stream);
+            _log.Info("Caricato studente <" + s.ToString() + ">");
+            Students.Add(s);
+          }
+        }
+
+        _log.Info("...Ok!");
+        return true;
+      }
+      catch (Exception exc)
+      {
+        _log.Error("Exception in data_evaluation_scheme_load_from_file(): " + exc.Message);
+        return false;
+      }
     }
 
     #endregion

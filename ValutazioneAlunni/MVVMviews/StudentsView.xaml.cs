@@ -203,7 +203,10 @@ namespace ValutazioneAlunni.MVVMviews
       if (_evaluation_scheme == null) return;
       if (_student == null) return;
 
-      // Load student evaluation leves on UI
+      // Load student evaluation levels on UI
+
+      if (_student.EvaluationItems == null) return;
+      if (_student.EvaluationItems.Count == 0) return;
 
       foreach (StudentEvaluationItem ei in _student.EvaluationItems)
       {
@@ -216,7 +219,14 @@ namespace ValutazioneAlunni.MVVMviews
             ComboBox cmb = (ComboBox)ui_element;
             if (cmb.Tag.ToString() == ei.Tag)
             {
-              cmb.SelectedIndex = (ei.EvalNumber - 1);
+              if (ei.EvalNumber >= 1)
+              {
+                cmb.SelectedIndex = (ei.EvalNumber - 1);
+              }
+              else
+              {
+                cmb.SelectedItem = null;
+              }
             }
           }
         }

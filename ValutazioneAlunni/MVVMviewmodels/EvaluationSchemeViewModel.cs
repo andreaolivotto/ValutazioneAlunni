@@ -43,31 +43,10 @@ namespace ValutazioneAlunni.MVVMviewmodels
       scheme_load();
     }
 
-    private string get_file_name()
-    {
-      return "RubricaValutativa_rev" + _evaluation_scheme.Release + ".xml";
-    }
-
     private void scheme_load()
     {
       _evaluation_scheme = DataContainer.Instance.EvaluationScheme;
       _evaluation_scheme_print = _evaluation_scheme.ToString();
-    }
-
-    private void scheme_save()
-    {
-      try
-      {
-        string complete_file_name = Path.Combine(_settings.WorkingFolder, get_file_name());
-        XmlSerializer serializer = new XmlSerializer(typeof(EvaluationScheme));
-        StreamWriter file_writer = new StreamWriter(complete_file_name);
-        serializer.Serialize(file_writer, _evaluation_scheme);
-        file_writer.Close();
-      }
-      catch (Exception exc)
-      {
-        _log.Error("Exception in scheme_save(): " + exc.Message);
-      }
     }
 
     #endregion

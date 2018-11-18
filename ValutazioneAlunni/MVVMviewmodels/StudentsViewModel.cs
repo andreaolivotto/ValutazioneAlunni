@@ -18,6 +18,11 @@ namespace ValutazioneAlunni.MVVMviewmodels
 
     private static Log _log = Log.Instance;
 
+    private bool _edit_mode;
+    private bool _new_mode;
+    private StudentData _new_student;
+    private StudentData _last_selected_student;
+
     #endregion
 
     #region init and deinit
@@ -49,6 +54,7 @@ namespace ValutazioneAlunni.MVVMviewmodels
     {
       Students = DataContainer.Instance.Students;
 
+      exit_new_mode();
       students_print_all();
       students_select_first();
     }
@@ -106,6 +112,13 @@ namespace ValutazioneAlunni.MVVMviewmodels
         if (_selected_student == null) return;
 
         _log.Info("Salva dati studente <" + _selected_student + ">");
+
+        _last_selected_student = _selected_student;
+        if (NewMode)
+        {
+          DataContainer.Instance.Students.Add(_selected_student);
+          exit_new_mode();
+        }
       }
       catch (Exception exc)
       {
@@ -113,9 +126,78 @@ namespace ValutazioneAlunni.MVVMviewmodels
       }
     }
 
+    private void student_create_new()
+    {
+      enter_new_mode();
+    }
+
+    private void enter_new_mode()
+    {
+      EditMode = true;
+      NewMode = true;
+      _new_student = new StudentData(DataContainer.Instance.EvaluationScheme);
+      _last_selected_student = SelectedStudent;
+      SelectedStudent = _new_student;
+
+      RaisePropertyChanged("NewMode");
+      RaisePropertyChanged("NotNewMode");
+    }
+
+    private void exit_new_mode()
+    {
+      EditMode = false;
+      NewMode = false;
+      _new_student = null;
+
+      if (_last_selected_student == null)
+      {
+        students_select_first();
+      }
+      else
+      {
+        SelectedStudent = _last_selected_student;
+      }
+
+      RaisePropertyChanged("NewMode");
+      RaisePropertyChanged("NotNewMode");
+    }
+
     #endregion
 
     #region public properties
+
+    public bool NewMode
+    {
+      get
+      {
+        return _new_mode;
+      }
+      private set
+      {
+        _new_mode = value;
+      }
+    }
+
+    public bool NotNewMode
+    {
+      get
+      {
+        return !_new_mode;
+      }
+    }
+
+    public bool EditMode
+    {
+      get
+      {
+        return _edit_mode;
+      }
+      set
+      {
+        _edit_mode = value;
+        RaisePropertyChanged("EditMode");
+      }
+    }
 
     private ObservableCollection<StudentData> _students = null;
     public ObservableCollection<StudentData> Students
@@ -150,20 +232,6 @@ namespace ValutazioneAlunni.MVVMviewmodels
         }
         studens_refresh_detail_data();
         RaisePropertyChanged("SelectedStudent");
-      }
-    }
-
-    private bool _edit_mode;
-    public bool EditMode
-    {
-      get
-      {
-        return _edit_mode;
-      }
-      set
-      {
-        _edit_mode = value;
-        RaisePropertyChanged("EditMode");
       }
     }
 
@@ -239,6 +307,35 @@ namespace ValutazioneAlunni.MVVMviewmodels
 
     #region commands
 
+    private ICommand _new_student_cmd;
+    public ICommand NewCmd
+    {
+      get
+      {
+        if (_new_student_cmd == null)
+        {
+          _new_student_cmd = new RelayCommand(
+              param => this.new_student(),
+              param => this.can_new_student()
+              );
+        }
+        return _new_student_cmd;
+      }
+    }
+
+    private bool can_new_student()
+    {
+      if (_selected_student == null) return false;
+      if (EditMode == true) return false;
+      if (NewMode == true) return false;
+      return true;
+    }
+
+    private void new_student()
+    {
+      student_create_new();
+    }
+
     private ICommand _save_cmd;
     public ICommand SaveCmd
     {
@@ -247,21 +344,24 @@ namespace ValutazioneAlunni.MVVMviewmodels
         if (_save_cmd == null)
         {
           _save_cmd = new RelayCommand(
-              param => this.Save(),
-              param => this.CanSave()
+              param => this.save(),
+              param => this.can_save()
               );
         }
         return _save_cmd;
       }
     }
 
-    private bool CanSave()
+    private bool can_save()
     {
       if (_selected_student == null) return false;
+      if (_selected_student.FirstName == "") return false;
+      if (_selected_student.LastName == "") return false;
+      if (EditMode == false) return false;
       return true;
     }
 
-    private void Save()
+    private void save()
     {
       student_save();
     }

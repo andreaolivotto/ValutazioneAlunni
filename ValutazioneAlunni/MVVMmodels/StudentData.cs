@@ -53,9 +53,48 @@ namespace ValutazioneAlunni.MVVMmodels
 
     public List<StudentEvaluationItem> EvaluationItems;
 
+    public StudentData(EvaluationScheme evaluation_scheme)
+    {
+      load_evaluation_scheme(evaluation_scheme);
+    }
+
     public override string ToString()
     {
       return LastName + " " + FirstName;
+    }
+
+    private void load_evaluation_scheme(EvaluationScheme evaluation_scheme)
+    {
+      int chapter_idx;
+      int section_idx;
+
+      try
+      {
+        if (evaluation_scheme == null) return;
+
+        EvaluationSchemeRelease = evaluation_scheme.Release;
+        EvaluationSchemeDate = evaluation_scheme.DatePubblication.ToString("dd/MM/yyyy");
+
+        EvaluationItems = new List<StudentEvaluationItem>();
+        chapter_idx = 0;
+        foreach (EvaluationChapter chapter in evaluation_scheme.Chapters)
+        {
+          section_idx = 0;
+          foreach (EvaluationSection section in chapter.Sections)
+          {
+            StudentEvaluationItem i = new StudentEvaluationItem();
+            i.Tag = StudentEvaluationItem.EncodeTag(chapter_idx, section_idx);
+            i.LastChange = DateTime.Now;
+            i.EvalNumber = -1;
+            EvaluationItems.Add(i);
+            section_idx++;
+          }
+          chapter_idx++;
+        }
+      }
+      catch
+      {
+      }
     }
   }
 }

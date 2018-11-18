@@ -12,6 +12,7 @@
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto"/>
       <RowDefinition/>
+      <RowDefinition Height="Auto"/>
     </Grid.RowDefinitions>
     <Grid.ColumnDefinitions>
       <ColumnDefinition Width="200"/>
@@ -26,7 +27,7 @@
               VerticalAlignment="Stretch"
               VerticalContentAlignment="Stretch"
               ScrollViewer.VerticalScrollBarVisibility="Visible"/>
-
+    
     <!-- detail -->
     <Grid Margin="10,0,0,0" Grid.Column="1" Grid.Row="1" Background="White">
       <Grid.RowDefinitions>
@@ -62,10 +63,24 @@
         </Grid>
       </ScrollViewer>
 
-      <Button Content="Salva" 
-              Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"
+      <StackPanel Orientation="Horizontal"
+                  Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"
+                  HorizontalAlignment="Center">
+
+        <Button Content="Nuovo"               
+              Style="{StaticResource BaseButton_Style}"
+              Command="{Binding NewCmd}"/>
+
+        <Button Content="Salva"               
               Style="{StaticResource BaseButton_Style}"
               Command="{Binding SaveCmd}"/>
+
+        <!--<Button Content="Ricarica da disco"  
+                Width="120"
+              Style="{StaticResource BaseButton_Style}"
+              Command="{Binding ReloadCmd}"/>-->
+
+      </StackPanel>
       
     </Grid>
 

@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<EvaluationScheme xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Release>1.0</Release>
+  <DatePubblication>2018-11-17T00:00:00</DatePubblication>
+  <Notes>Fake data</Notes>
+  <Chapters>
+    <EvaluationChapter>
+      <Name>Il sé e l’altro</Name>
+      <Description>Frequentando la scuola, il bambino ha l’opportunità di ampliare il mondo delle proprie relazioni e può così sviluppare meglio le sue “capacità non soltanto di stare genericamente con gli altri, ma anche di comprendere, condividere, aiutare e cooperare”. Le diverse esperienze che riguardano “il sé e l’altro” si intrecciano con le attività degli altri campi e tendono allo sviluppo affettivo ed emotivo, sociale, etico morale e di un corretto atteggiamento nei confronti della religiosità e delle religioni.</Description>
+      <Sections>
+        <EvaluationSection>
+          <Name>Sviluppo dell’identità e dell’autonomia personale</Name>
+          <Description>Il bambino e se stesso: riconosce, ed esprime i propri bisogni, esigenze, sentimenti, capacità.</Description>
+          <Levels>
+            <EvaluationLevel>
+              <Level>1</Level>
+              <Description>Su invito dell’insegnante che lo sostiene emotivamente, esprime i propri bisogni primari, esigenze. Con l’aiuto dell’insegnante osserva le routine della giornata. Stimolato, scopre le proprie capacità ed inizia a maturare un positivo senso di sé.</Description>
+            </EvaluationLevel>
+            <EvaluationLevel>
+              <Level>2</Level>
+              <Description>Esprime i propri bisogni primari e le principali emozioni; racconta i propri vissuti con domande stimolo dell’insegnante. Inizia a scoprire le proprie capacità e ad avere fiducia in sé.</Description>
+            </EvaluationLevel>
+            <EvaluationLevel>
+              <Level>3</Level>
+              <Description>Esprime in modo consapevole i propri bisogni/esigenze che riconosce su di sé e sugli altri. Manifesta i propri stati d’animo / emozioni con i diversi linguaggi ed inizia a gestirli ed a controllarli. Ha fiducia nelle proprie capacità.</Description>
+            </EvaluationLevel>
+            <EvaluationLevel>
+              <Level>4</Level>
+              <Description>Esprime in modo autonomo, pertinente e responsabile le proprie e altrui esigenze formulando ipotesi e trovando soluzioni adeguate. Ha una buona immagine di sé: ha sicurezza e fiducia nelle proprie capacità.</Description>
+            </EvaluationLevel>
+          </Levels>
+        </EvaluationSection>
+        <EvaluationSection>
+          <Name>Socializzazione</Name>
+          <Description>Il bambino e gli altri: accetta gli altri, coetanei e adulti e partecipa all'attività di gruppo.</Description>
+          <Levels>
+            <EvaluationLevel>
+              <Level>1</Level>
+              <Description>E’ interessato ai coetanei, agli adulti e all’ambiente circostante; gioca vicino ai compagni e con l’aiuto dell’insegnante partecipa alle attività collettive mantenendo l’attenzione per brevi periodi.</Description>
+            </EvaluationLevel>
+            <EvaluationLevel>
+              <Level>2</Level>
+              <Description>Condivide semplici esperienze con i pari: gioca con i compagni scambiando informazioni, si relaziona positivamente con il piccolo gruppo. Nelle attività collettive inizia a manifestare interesse apportando il proprio contributo.</Description>
+            </EvaluationLevel>
+            <EvaluationLevel>
+              <Level>3</Level>
+              <Description>Accetta i compagni ed è disponibile ad aiutare chi è in difficoltà, riconosce i diversi ruoli. Partecipa attivamente alle esperienze del grande gruppo collaborando in modo proficuo.</Description>
+            </EvaluationLevel>
+            <EvaluationLevel>
+              <Level>4</Level>
+              <Description>Accetta i pari e gli adulti che rispetta e con i quali interagisce positivamente, giocando e lavorando in modo costruttivo e creativo. Si accorge delle difficoltà dei compagni che aiuta spontanea - mente; dell’adulto tiene in considerazione suggerimenti e consigli. Affronta con interesse e curiosità le varie attività proposte: pone domande, formula ipotesi.</Description>
+            </EvaluationLevel>
+          </Levels>
+        </EvaluationSection>
+		
+		<EvaluationSection>
+          <Name>Senso di cittadinanza</Name>
+          <Description>Il bambino e le regole: Osserva comportamenti rispettosi verso le persone, l’ambiente circostante e verso le regole (rispetta turni, tempi, spazi, riconosce i più importanti segni della sua cultura delle sue tradizioni del suo territorio e le mette a confronto con altre).</Description>
+          <Levels>
+            <EvaluationLevel>
+              <Level>1</Level>
+              <Description>Necessita dell’aiuto dell’insegnante per la gestione dei turni, dei tempi e degli spazi, e delle attività in sezione. Inizia a conoscere le nuove regole di socialità e delle routine scolastiche che incomincia a mettere in pratica supportata dall’adulto.</Description>
+            </EvaluationLevel>
+            <EvaluationLevel>
+              <Level>2</Level>
+              <Description>Conosce ed inizia a rispettare semplici regole di convivenza (saper stare in fila, rispettare il proprio turno nelle attività, condividere alcuni materiali di gioco…), le proprie cose, quelle altrui e il mondo che lo circonda.</Description>
+            </EvaluationLevel>
+            <EvaluationLevel>
+              <Level>3</Level>
+              <Description>Ha interiorizzato e fatto proprie le regole di convivenza; se aiutato, ha una prima consapevolezza dei diritti propri, degli altri e rispetta le differenze. Riconosce situazioni e comportamenti pericolosi per sé e per gli altri: sa adattare il proprio comportamento nelle diverse situazioni riconoscendo le conseguenze delle proprie azioni.</Description>
+            </EvaluationLevel>
+            <EvaluationLevel>
+              <Level>4</Level>
+              <Description>Ha raggiunto una prima consapevolezza dei propri diritti e doveri; rispetta le regole, motiva la ragione dei propri comportamenti assumendosene la responsabilità e le conseguenze. Accetta ed interagisce positivamente con persone differenti da sé, coinvolgendoli nel gioco e nelle attività.</Description>
+            </EvaluationLevel>
+          </Levels>
+        </EvaluationSection>
+		
+		<EvaluationSection>
+          <Name>Dimensione emotiva</Name>
+          <Description>Il bambino ed il vissuto emotivo: sperimenta il piacere, manifesta e controlla reazioni emotive di fronte alla frustrazione, alle situazioni, problema–conflitto quotidiane.</Description>
+          <Levels>
+            <EvaluationLevel>
+              <Level>1</Level>
+              <Description>Scopre e manifesta liberamente le proprie reazioni emotive attraverso i linguaggi non verbali; con l’aiuto dell’insegnante comincia ad esprimersi anche verbalmente con cenni e parole frasi.</Description>
+            </EvaluationLevel>
+            <EvaluationLevel>
+              <Level>2</Level>
+              <Description>Manifesta ed esprime le proprie reazioni emotive sia a livello non verbale che verbale con enunciati minimi. Comincia a sperimentare un primo controllo dei propri stati d’animo in situazioni a lui note.</Description>
+            </EvaluationLevel>
+            <EvaluationLevel>
+              <Level>3</Level>
+              <Description>Sperimenta e vive positivamente le varie esperienze legate sia al piacere che alla frustrazione. Manifesta e controlla i vari stati d’animo autonomamente. Incomincia a superare il proprio egocentrismo negoziando o trovando nuove strategie.</Description>
+            </EvaluationLevel>
+            <EvaluationLevel>
+              <Level>4</Level>
+              <Description>Manifesta, controlla e dà un nome alle proprie emozioni, trovando autonomamente strategie adeguate per superare la frustrazione e le situazioni conflittuali. Formula valutazioni ed ipotesi sulle cause e sulle azioni legate al piacere e alla frustrazione.</Description>
+            </EvaluationLevel>
+          </Levels>
+        </EvaluationSection>
+
+		<EvaluationSection>
+          <Name>Senso di
+appartenenza</Name>
+          <Description>Il bambino e le tradizioni della famiglia e della comunità: sa di avere una storia personale, conosce le tradizioni della famiglia e della comunità.</Description>
+          <Levels>
+            <EvaluationLevel>
+              <Level>1</Level>
+              <Description>Riconosce e nomina i membri della propria famiglia di cui ne distingue i ruoli primari. Con l’aiuto dell’insegnante conosce i membri della comunità scolastica.</Description>
+            </EvaluationLevel>
+            <EvaluationLevel>
+              <Level>2</Level>
+              <Description>E’ cosciente di avere una propria storia personale. Inizia a porre domande su di sé, riferisce eventi della propria famiglia. Manifesta un primo senso di appartenenza: riconosce i compagni, le maestre, gli spazi, i materiali, i contesti.</Description>
+            </EvaluationLevel>
+            <EvaluationLevel>
+              <Level>3</Level>
+              <Description>Racconta episodi di vita famigliare a lui noti, conosce alcune tradizioni e le maggiori feste della propria comunità della quale ha maturato una prima consapevolezza di senso appartenenza.</Description>
+            </EvaluationLevel>
+            <EvaluationLevel>
+              <Level>4</Level>
+              <Description>E’ cosciente della propria storia, di quella familiare e della comunità, sviluppando un senso di appartenenza. Conosce le usanze del proprio ambiente di vita. Si apre al confronto con altre culture e costumi.</Description>
+            </EvaluationLevel>
+          </Levels>
+        </EvaluationSection>
+
+		<EvaluationSection>
+          <Name>Ascolto e disponibilità al confronto reciproco</Name>
+          <Description>Riflette, si confronta, riconosce la reciprocità di attenzione tra chi parla e chi ascolta.</Description>
+          <Levels>
+            <EvaluationLevel>
+              <Level>1</Level>
+              <Description>Con la guida dell’insegnante ascolta per tempi brevi adulti e coetanei all’interno di un piccolo gruppo. Prova piacere nel sentire la propria voce.</Description>
+            </EvaluationLevel>
+            <EvaluationLevel>
+              <Level>2</Level>
+              <Description>Inizia a prestare ascolto a chi parla mantenendo l’attenzione e con tempi via via sempre più lunghi. Spinto dalla curiosità, si confronta con gli altri, ponendo semplici domande sulla realtà che lo circonda.</Description>
+            </EvaluationLevel>
+            <EvaluationLevel>
+              <Level>3</Level>
+              <Description>Partecipa con attenzione al confronto con i pari e gli adulti dei quali accetta opinioni diverse dalla propria. Interviene in modo pertinente rispettando chi parla e i turni di parola. Inizia a riflettere.</Description>
+            </EvaluationLevel>
+            <EvaluationLevel>
+              <Level>4</Level>
+              <Description>Riflette, si confronta, discute con gli adulti e con gli altri bambini in modo pertinente e adeguato. Comincia a riconoscere la reciprocità di attenzione tra chi parla e chi ascolta apportando il proprio personale e costruttivo contributo.</Description>
+            </EvaluationLevel>
+          </Levels>
+        </EvaluationSection>
+		
+      </Sections>
+    </EvaluationChapter>
+	
+    <EvaluationChapter>
+      <Name>Il corpo e il movimento</Name>
+      <Description>Il corpo è il primo medium dell’apprendimento. Attraverso il corpo il bambino impara a prendere consapevolezza della realtà che lo circonda nello spazio, a relazionarsi con la realtà esterna, a esprimere i suoi sentimenti (gioia, tristezza, paura, dolore , affetto...). In breve: a conoscere e a comunicare.</Description>
+      <Sections>
+	  
+        <EvaluationSection>
+          <Name>Cura di sé</Name>
+          <Description>Il bambino ha cura del proprio corpo nei comportamenti di igiene, nel vestirsi e nell’alimentazione.</Description>
+          <Levels>
+            <EvaluationLevel>
+              <Level>1</Level>
+              <Description>Con l’aiuto dell’adulto o di un compagno tutor, inizia a conoscere la routine scolastica: accede ai servizi e talvolta si tiene pulito, si lava le mani; si nutre, si lascia vestire e svestire.</Description>
+            </EvaluationLevel>
+            <EvaluationLevel>
+              <Level>2</Level>
+              <Description>Sollecitato verbalmente dell’adulto che lo invita a tenersi pulito, a mangiare servendosi delle posate, talvolta riesce ad effettuare correttamente la routine scolastica. Prova a vestirsi/svestirsi. Comincia a chiedere aiuto all’adulto nei momenti di difficoltà.</Description>
+            </EvaluationLevel>
+            <EvaluationLevel>
+              <Level>3</Level>
+              <Description>In autonomia si tiene pulito e conosce ed osserva le pratiche igieniche di routine; sa vestirsi e svestirsi; mangia correttamente e sa stare seduto composto. Esprime le proprie preferenze alimentari e accetta di assaggiare alimenti nuovi.</Description>
+            </EvaluationLevel>
+            <EvaluationLevel>
+              <Level>4</Level>
+              <Description>Ha interiorizzato e consolidato la routine scolastica; ha cura del proprio corpo. Sa vestirsi e svestirsi manifestando la capacità di autoregolazione termica, abbottonare e sbottonare, allacciare e slacciare. Mangia correttamente e sa stare seduto composto, aiuta gli altri e sa dar loro corrette indicazioni di comportamento.</Description>
+            </EvaluationLevel>
+          </Levels>
+		</EvaluationSection>
+
+		<EvaluationSection>
+          <Name>Sensi</Name>
+          <Description>Il bambino esercita l’uso dei sensi ed esplora il mondo che lo circonda.</Description>
+          <Levels>
+            <EvaluationLevel>
+              <Level>1</Level>
+              <Description>Con la guida dell’adulto esplora i vari ambienti, comincia a sperimentarsi ed a sperimentare manipolando i diversi materiali e strumenti e distinguendo situazioni piacevoli da quelle spiacevoli.</Description>
+            </EvaluationLevel>
+            <EvaluationLevel>
+              <Level>2</Level>
+              <Description>Esplora spontaneamente i vari ambienti conosciuti, si accosta con piacere ed interesse ai vari materiali e strumenti che utilizza con l’uso dei sensi. Riconosce e descrive verbalmente alcune sensazioni.</Description>
+            </EvaluationLevel>
+            <EvaluationLevel>
+              <Level>3</Level>
+              <Description>Impiega in modo appropriato i sensi per esplorare il mondo che lo circonda. Manifesta piacere senso-percettivo nell’usare in modo corretto e creativo i materiali e gli strumenti a disposizione.</Description>
+            </EvaluationLevel>
+            <EvaluationLevel>
+              <Level>4</Level>
+              <Description>E’ curioso, prova piacere e gratificazione nell’ esplorare autonomamente e in modo disinvolto ambienti nuovi; utilizza in modo reversibile i diversi materiali e strumenti che manipola, discrimina, accosta e associa per caratteristiche senso-percettive.</Description>
+            </EvaluationLevel>
+          </Levels>
+        </EvaluationSection>
+
+		<EvaluationSection>
+          <Name>Potenzialità corporee, movimento, motricità globale</Name>
+          <Description>Il bambino controlla il movimento e lo utilizza in diverse forme di attività e di destrezza del corpo (correre, stare in equilibrio, coordinarsi con gli altri...). Si muove nello spazio padroneggiando gli schemi motori statici e dinamici (saltare, strisciare, rotolare.)</Description>
+          <Levels>
+            <EvaluationLevel>
+              <Level>1</Level>
+              <Description>Con l’aiuto dell’insegnante inizia a percepirsi scoprendo piano piano le potenzialità corporee. Va incoraggiato e talvolta rassicurato nel provare a fare determinati schemi motori/ movimenti; se stimolato, partecipa a semplici giochi motori.</Description>
+            </EvaluationLevel>
+            <EvaluationLevel>
+              <Level>2</Level>
+              <Description>Si muove nello spazio con maggiore sicurezza nei movimenti; inizia a prendere consapevolezza delle potenzialità del proprio corpo nelle prime basilari sequenze ritmiche sperimentando il piacere senso-motorio. Inizia a controllare il proprio corpo in semplici schemi statici e dinamici (saltellare, saltare, strisciare). Partecipa e interagisce con i compagni nel gioco. Sa chiedere l’aiuto dell’adulto nei momenti di difficoltà.</Description>
+            </EvaluationLevel>
+            <EvaluationLevel>
+              <Level>3</Level>
+              <Description>Si muove e si orienta nello spazio anche seguendo ritmi, prendendo coscienza delle proprie capacità motorie che rafforzano l’immagine positiva di sé. Controlla schemi motori statici e dinamici (stare in equilibro, arrampicarsi…). Rispetta le regole e gli altri nel gioco motorio, prendendo accordi sulle regole da seguire.</Description>
+            </EvaluationLevel>
+            <EvaluationLevel>
+              <Level>4</Level>
+              <Description>Si muove con sicurezza e disinvoltura controllando e padroneggiando in maniera accurata schemi motori statici e dinamici. Partecipa ai giochi utilizzando il movimento nelle sue diverse forme, accettando anche le sconfitte.  Prova piacere nell’inventare e nel cimentarsi in diverse esperienze motorie accordandosi sulle regole da seguire: tali esperienze di gioco diventano lo strumento per acquisire e co-costruire nuove conoscenze.</Description>
+            </EvaluationLevel>
+          </Levels>
+        </EvaluationSection>
+
+		<EvaluationSection>
+          <Name>Motricità fine</Name>
+          <Description>Il bambino controlla la motricità fine in operazioni di routine: colorare, piegare, tagliare, eseguire semplici compiti grafici.</Description>
+          <Levels>
+            <EvaluationLevel>
+              <Level>1</Level>
+              <Description>Talvolta si approccia spontaneamente alle attività di manipolazione: sperimenta e pasticcia anche con gli strumenti a disposizione che usa sotto forma di gioco, manifestando una grossolana motricità. Guidato dall’adulto comincia ad eseguire e sperimentare le prime tecniche espressive per il piacere di lasciare una traccia di sé.</Description>
+            </EvaluationLevel>
+            <EvaluationLevel>
+              <Level>2</Level>
+              <Description>Esegue semplici operazioni di manualità fine: colorare, piegare, tagliare. Incomincia ad interiorizzare le funzionalità d’uso e le modalità operative di alcuni semplici strumenti a disposizione per le prime tecniche espressive e a controllarli. Inizia a controllare la coordinazione oculo-manuale in attività che richiedono la motricità grosso- motoria.</Description>
+            </EvaluationLevel>
+            <EvaluationLevel>
+              <Level>3</Level>
+              <Description>In autonomia utilizza e controlla gli strumenti a disposizione per eseguire esercizi di coordinazione oculo manuale: piegare, ritagliare lungo una linea data, seguire una riga in un foglio riproducendo sequenze grafiche o il proprio nome... Il segno grafico si presenta sempre più fluido e sicuro nello spazio grafico; sviluppato l’orientamento grafico.</Description>
+            </EvaluationLevel>
+            <EvaluationLevel>
+              <Level>4</Level>
+              <Description>Controlla in maniera accurata la coordinazione oculo manuale in attività motorie che richiedono la motricità fine (tagliare lungo una linea, seguire una linea su un foglio riproducendo sequenze grafiche o il proprio nome, colorare, punteggiare).  Presenta un segno grafico sicuro: le abilità grafo-motorie e l'orientamento spaziale sono sviluppati così pure la flessibilità del movimento rotatorio della mano; la scioltezza nel tracciato grafico è acquisita e infine consolidata la direzionalità (dx, sx). Prova piacere nello sperimentarsi nella scrittura spontanea.</Description>
+            </EvaluationLevel>
+          </Levels>
+        </EvaluationSection>
+		
+		<EvaluationSection>
+          <Name>Rischio</Name>
+          <Description>Il bambino controlla i propri movimenti per evitare rischi per sè e gli altri; osserva comportamenti atti a prevenire i rischi.</Description>
+          <Levels>
+            <EvaluationLevel>
+              <Level>1</Level>
+              <Description>Si muove nello spazio ed evita talvolta situazioni potenzialmente pericolose per la sua incolumità indicate dall’insegnante o dai compagni.</Description>
+            </EvaluationLevel>
+            <EvaluationLevel>
+              <Level>2</Level>
+              <Description>Nel muoversi nello spazio individua situazioni potenzialmente pericolose e le evita; inizia ad imitare comportamenti corretti atti a prevenire rischi.</Description>
+            </EvaluationLevel>
+            <EvaluationLevel>
+              <Level>3</Level>
+              <Description>Si muove in autonomia nello spazio individuando situazioni pericolose, le indica all’adulto e ai compagni e le evita.  Osserva, riconosce ed imita i comportamenti degli altri per prevenire i rischi Controlla i propri movimenti e riconosce la propria forza.</Description>
+            </EvaluationLevel>
+            <EvaluationLevel>
+              <Level>4</Level>
+              <Description>In presenza di situazioni potenzialmente pericolose, adotta comportamenti preventivi e li indica anche ai compagni. Ipotizza semplici misure di riduzione della pericolosità. Controlla i propri movimenti, valuta la propria forza. Mette in atto comportamenti adeguati per prevenire situazioni problematiche ed assume piccole responsabilità per la salvaguardia della sicurezza.</Description>
+            </EvaluationLevel>
+          </Levels>
+        </EvaluationSection>
+		
+		<EvaluationSection>
+          <Name>Rappresentazione del corpo e delle sue parti</Name>
+          <Description>Il bambino conosce le diverse parti del corpo e le rappresenta in stasi e movimento.</Description>
+          <Levels>
+            <EvaluationLevel>
+              <Level>1</Level>
+              <Description>Con l’ausilio di canzoncine e filastrocche, per imitazione, indica le parti del proprio corpo e ne sperimenta la loro funzionalità. Rappresenta il proprio corpo con “l’omino testone”.</Description>
+            </EvaluationLevel>
+            <EvaluationLevel>
+              <Level>2</Level>
+              <Description>Attraverso l’uso dello specchio o di giochi di mimo indica e nomina le parti del corpo e ne conosce le funzioni principali; coglie le diversità di genere. Rappresenta in modo semplice lo schema corporeo.</Description>
+            </EvaluationLevel>
+            <EvaluationLevel>
+              <Level>3</Level>
+              <Description>In autonomia indica, riconosce, nomina e rappresenta le parti del proprio corpo; individua e riferisce le sue principali funzioni. Opera delle distinzioni di genere, iniziando a rompere certe stereotipie. Rappresenta in modo completo lo schema corporeo in situazioni di stasi.</Description>
+            </EvaluationLevel>
+            <EvaluationLevel>
+              <Level>4</Level>
+              <Description>E’ interessato e curioso ai cambiamenti del proprio corpo come tappa di crescita (diventare grandi) e come oggetto di conoscenza. Indica, riconosce, denomina e rappresenta le parti del corpo e quelle del corpo degli altri in forma realistica; ne riconosce le diverse funzioni formulando ipotesi e ponendo domande sul loro funzionamento. Rappresenta in modo completo lo schema corporeo anche in movimento aggiungendo e curando i vari dettagli.</Description>
+            </EvaluationLevel>
+          </Levels>
+        </EvaluationSection>
+
+      </Sections>
+    </EvaluationChapter>
+	
+  </Chapters>
+</EvaluationScheme>
