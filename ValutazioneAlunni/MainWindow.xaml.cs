@@ -62,7 +62,8 @@ namespace ValutazioneAlunni
 
     private void data_init()
     {
-      DataContainer.Instance.LoadFakeData();
+      //DataContainer.Instance.LoadFakeData();
+      DataContainer.Instance.LoadData();
     }
 
     private void mvvm_init()

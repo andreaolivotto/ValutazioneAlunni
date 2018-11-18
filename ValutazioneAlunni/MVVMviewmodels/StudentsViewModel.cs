@@ -117,7 +117,9 @@ namespace ValutazioneAlunni.MVVMviewmodels
         if (NewMode)
         {
           DataContainer.Instance.Students.Add(_selected_student);
+          DataContainer.Instance.SaveStudent(_selected_student);
           exit_new_mode();
+
         }
       }
       catch (Exception exc)
@@ -325,7 +327,7 @@ namespace ValutazioneAlunni.MVVMviewmodels
 
     private bool can_new_student()
     {
-      if (_selected_student == null) return false;
+      //if (_selected_student == null) return false;
       if (EditMode == true) return false;
       if (NewMode == true) return false;
       return true;

@@ -64,17 +64,29 @@ namespace ValutazioneAlunni.Data
 
     #region public functions
 
-    public void LoadFakeData()
+    public bool LoadData()
     {
-      //evaluation_scheme_load_fake_data();
       evaluation_scheme_load_from_file();
 
-      //students_load_fake_data();
+      Students = new ObservableCollection<StudentData>();
+
+      return students_load_from_file();
+    }
+
+    public void LoadFakeData()
+    {
+      evaluation_scheme_load_fake_data();
+      students_load_fake_data();
+    }
+
+    public bool SaveStudent(StudentData s)
+    {
+      return students_save_to_file(s);
     }
 
     #endregion
 
-    #region private functions
+    #region private functions - evaluation scheme
 
     private string evaluation_scheme_get_file_name()
     {
@@ -264,6 +276,10 @@ namespace ValutazioneAlunni.Data
       //chapter.Sections.Add(sec);
     }
 
+    #endregion
+
+    #region private functions - student data
+
     private void students_load_fake_data()
     {
       StudentData sd;
@@ -325,13 +341,24 @@ namespace ValutazioneAlunni.Data
       Students = list_of_students;
     }
 
-    private bool is_student_file(string file_name)
+    private bool is_student_file(string complete_file_name)
     {
-      if (file_name.StartsWith("student_"))
+      string file_name = Path.GetFileName(complete_file_name);
+
+      if (file_name.StartsWith("student_") == false)
       {
-        return true;
+        return false;
       }
-      return false;
+      if (file_name.StartsWith(".xml") == false)
+      {
+        return false;
+      }
+      return true;
+    }
+
+    private string get_student_file_name(StudentData s)
+    {
+      return "student_" + s.LastName + "_" + s.FirstName + ".xml";
     }
 
     private bool students_load_from_file()
@@ -363,7 +390,37 @@ namespace ValutazioneAlunni.Data
       }
       catch (Exception exc)
       {
-        _log.Error("Exception in data_evaluation_scheme_load_from_file(): " + exc.Message);
+        _log.Error("Exception in students_load_from_file(): " + exc.Message);
+        return false;
+      }
+    }
+
+    private bool students_save_to_file(StudentData s)
+    {
+      try
+      {
+        if (s == null) return false;
+
+        _log.Info("Salvataggio studente <" + s.ToString() + ">...");
+        _log.Info("Cartella di lavoro: " + _settings.WorkingFolder);
+
+        string complete_file_name = Path.Combine(_settings.WorkingFolder, get_student_file_name(s));
+        _log.Info("File: " + complete_file_name);
+        if (File.Exists(complete_file_name))
+        {
+          File.Delete(complete_file_name);
+        }
+
+        XmlSerializer serializer = new XmlSerializer(typeof(StudentData));
+        StreamWriter file_writer = new StreamWriter(complete_file_name);
+        serializer.Serialize(file_writer, s);
+        file_writer.Close();
+        _log.Info("...Ok!");
+        return true;
+      }
+      catch (Exception exc)
+      {
+        _log.Error("Exception in evaluation_scheme_save_to_file(): " + exc.Message);
         return false;
       }
     }

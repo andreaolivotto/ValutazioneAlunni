@@ -41,7 +41,7 @@ namespace ValutazioneAlunni.MVVMmodels
   }
 
   [Serializable]
-  class StudentData
+  public class StudentData
   {
     public string EvaluationSchemeRelease;
     public string EvaluationSchemeDate;
@@ -52,6 +52,10 @@ namespace ValutazioneAlunni.MVVMmodels
     public string Note;
 
     public List<StudentEvaluationItem> EvaluationItems;
+
+    public StudentData()
+    {
+    }
 
     public StudentData(EvaluationScheme evaluation_scheme)
     {
