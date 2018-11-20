@@ -57,6 +57,7 @@
     </ApplicationDefinition>
     <Compile Include="Data\DataContainer.cs" />
     <Compile Include="MVVMmodels\ApplicationSettings.cs" />
+    <Compile Include="MVVMutils\Converters.cs" />
     <Compile Include="MVVMutils\RelayCommand.cs" />
     <Compile Include="MVVMutils\WPFMessengerClass.cs" />
     <Compile Include="MVVMviewmodels\BaseViewModel.cs" />

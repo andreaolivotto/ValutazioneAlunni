@@ -58,7 +58,18 @@
           <Grid x:Name="TabEvaluationSchemeContainer"/>
         </TabItem>
 
-      </TabControl>
+        <TabItem x:Name="TabLogs" Header="Logs">
+          <Grid Margin="5">
+          <TextBox x:Name="txtLogs"
+                   Grid.Row="0" Grid.Column="0"
+                   VerticalScrollBarVisibility="Visible"
+                   VerticalAlignment="Stretch"
+                   Foreground="#FFEEEEEE"
+                   Background="#FF303030"
+                   FontFamily="Courier New"/>
+        </Grid>
+        </TabItem>
+    </TabControl>
         
     </Grid>
   

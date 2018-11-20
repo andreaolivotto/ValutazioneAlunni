@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ValutazioneAlunni.Data;
 using ValutazioneAlunni.MVVMmodels;
+using ValutazioneAlunni.MVVMutils;
 using ValutazioneAlunni.MVVMviewmodels;
 using ValutazioneAlunni.MVVMviews;
 using ValutazioneAlunni.Utilities;
@@ -32,6 +33,8 @@ namespace ValutazioneAlunni
 
     #endregion
 
+    #region init and deinit
+
     public MainWindow()
     {
       InitializeComponent();
@@ -40,6 +43,7 @@ namespace ValutazioneAlunni
       _log.Info("***************************************************");
       _log.Info("Start application at " + DateTime.Now.ToString());
       window_init();
+      messenger_init();
       _log.Info(Title);
 
       settings_init();
@@ -76,5 +80,31 @@ namespace ValutazioneAlunni
       TabEvaluationSchemeContainer.Children.Add(new EvaluationSchemeView());
       TabEvaluationSchemeContainer.DataContext = new EvaluationSchemeViewModel();
     }
+
+    #endregion
+
+    #region logs
+
+    private void messenger_init()
+    {
+      Messenger.Default.Register<string>(this, messenger_log, "Log");
+    }
+
+    public delegate void UpdateTextCallback(string message);
+
+    private void messenger_log(string txt)
+    {
+      txtLogs.Dispatcher.Invoke(
+            new UpdateTextCallback(this.messenger_log_delegate),
+            new object[] { txt }
+        );
+    }
+
+    private void messenger_log_delegate(string txt)
+    {
+      txtLogs.AppendText(txt + "\n");
+    }
+
+    #endregion
   }
 }

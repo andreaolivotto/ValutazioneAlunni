@@ -30,6 +30,7 @@ namespace ValutazioneAlunni.MVVMviews
     private StudentData _student;
     private EvaluationScheme _evaluation_scheme;
     private bool _loading_evaluation_scheme;
+    private bool _load_student;
 
     #endregion
 
@@ -40,6 +41,8 @@ namespace ValutazioneAlunni.MVVMviews
       InitializeComponent();
 
       messenger_init();
+
+      _load_student = false;
     }
 
     #endregion
@@ -196,6 +199,8 @@ namespace ValutazioneAlunni.MVVMviews
     private void Cmb_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
       if (_loading_evaluation_scheme) return;
+
+      update_current_student();
     }
 
     private void on_set_student()
@@ -204,6 +209,7 @@ namespace ValutazioneAlunni.MVVMviews
       if (_student == null) return;
 
       // Load student evaluation levels on UI
+      _load_student = true;
 
       if (_student.EvaluationItems == null) return;
       if (_student.EvaluationItems.Count == 0) return;
@@ -226,6 +232,40 @@ namespace ValutazioneAlunni.MVVMviews
               else
               {
                 cmb.SelectedItem = null;
+              }
+            }
+          }
+        }
+      }
+
+      _load_student = false;
+    }
+
+    private void update_current_student()
+    {
+      if (_evaluation_scheme == null) return;
+      if (_student == null) return;
+
+      if (_load_student) return;
+
+      foreach (StudentEvaluationItem ei in _student.EvaluationItems)
+      {
+        int idx;
+        for (idx = 0; idx < grdEvaluationScheme.Children.Count; idx++)
+        {
+          UIElement ui_element = grdEvaluationScheme.Children[idx];
+          if (ui_element is ComboBox)
+          {
+            ComboBox cmb = (ComboBox)ui_element;
+            if (cmb.Tag.ToString() == ei.Tag)
+            {
+              if (cmb.SelectedIndex < 0)
+              {
+                ei.EvalNumber = -1;
+              }
+              else
+              {
+                ei.EvalNumber = cmb.SelectedIndex;
               }
             }
           }

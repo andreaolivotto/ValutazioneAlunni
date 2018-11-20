@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ValutazioneAlunni.MVVMutils;
 
 namespace ValutazioneAlunni.Utilities
 {
@@ -34,12 +35,14 @@ namespace ValutazioneAlunni.Utilities
 
     public void Info(string LogMessage)
     {
-      Console.WriteLine("[INFO] " + LogMessage);
+      //Console.WriteLine("[INFO] " + LogMessage);
+      Messenger.Default.Send("[INFO] " + LogMessage, "Log");
     }
 
     public void Error(string LogMessage)
     {
-      Console.WriteLine("[ERROR] " + LogMessage);
+      //Console.WriteLine("[ERROR] " + LogMessage);
+      Messenger.Default.Send("[ERROR] " + LogMessage, "Log");
     }
   }
 }

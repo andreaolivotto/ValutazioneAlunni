@@ -349,7 +349,7 @@ namespace ValutazioneAlunni.Data
       {
         return false;
       }
-      if (file_name.StartsWith(".xml") == false)
+      if (file_name.EndsWith(".xml") == false)
       {
         return false;
       }
@@ -377,8 +377,7 @@ namespace ValutazioneAlunni.Data
           if (is_student_file(f))
           {
             // Load student
-            string complete_file_name = Path.Combine(_settings.WorkingFolder, f);
-            FileStream file_stream = new FileStream(complete_file_name, FileMode.Open);
+            FileStream file_stream = new FileStream(f, FileMode.Open);
             StudentData s = (StudentData)serializer.Deserialize(file_stream);
             _log.Info("Caricato studente <" + s.ToString() + ">");
             Students.Add(s);

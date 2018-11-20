@@ -53,6 +53,8 @@ namespace ValutazioneAlunni.MVVMmodels
 
     public List<StudentEvaluationItem> EvaluationItems;
 
+    #region init and deinit 
+
     public StudentData()
     {
     }
@@ -62,10 +64,25 @@ namespace ValutazioneAlunni.MVVMmodels
       load_evaluation_scheme(evaluation_scheme);
     }
 
+    #endregion
+
+    #region overrides
+
     public override string ToString()
     {
       return LastName + " " + FirstName;
     }
+
+    #endregion
+
+    #region ICloneable Members
+
+    public StudentData Clone()
+    {
+      return (StudentData)this.MemberwiseClone();
+    }
+
+    #endregion
 
     private void load_evaluation_scheme(EvaluationScheme evaluation_scheme)
     {

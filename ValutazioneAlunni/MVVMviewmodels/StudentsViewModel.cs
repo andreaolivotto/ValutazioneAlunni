@@ -20,7 +20,7 @@ namespace ValutazioneAlunni.MVVMviewmodels
 
     private bool _edit_mode;
     private bool _new_mode;
-    private StudentData _new_student;
+    private StudentData _edit_student;
     private StudentData _last_selected_student;
 
     #endregion
@@ -41,9 +41,9 @@ namespace ValutazioneAlunni.MVVMviewmodels
       Messenger.Default.Send(DataContainer.Instance.EvaluationScheme, "SetEvaluationScheme");
     }
 
-    private void messenger_send_set_student()
+    private void messenger_send_set_student(StudentData s)
     {
-      Messenger.Default.Send(_selected_student, "SetCurrentStudent");
+      Messenger.Default.Send(s, "SetCurrentStudent");
     }
 
     #endregion
@@ -54,7 +54,7 @@ namespace ValutazioneAlunni.MVVMviewmodels
     {
       Students = DataContainer.Instance.Students;
 
-      exit_new_mode();
+      exit_edit_mode(false);
       students_print_all();
       students_select_first();
     }
@@ -102,25 +102,36 @@ namespace ValutazioneAlunni.MVVMviewmodels
     private void on_student_selection()
     {
       messenger_send_set_evaluation_scheme();
-      messenger_send_set_student();
+      messenger_send_set_student(_selected_student);
     }
 
-    private void student_save()
+    private void student_save_new_or_edit()
     {
       try
       {
-        if (_selected_student == null) return;
+        if (_edit_student == null) return;
 
-        _log.Info("Salva dati studente <" + _selected_student + ">");
+        _log.Info("Salva dati studente <" + _edit_student + ">");
+        _log.Info("NewMode : " + NewMode);
+        _log.Info("EditMode: " + EditMode);
+        _log.Info(_edit_student.ToString());
 
-        _last_selected_student = _selected_student;
         if (NewMode)
         {
-          DataContainer.Instance.Students.Add(_selected_student);
-          DataContainer.Instance.SaveStudent(_selected_student);
+          DataContainer.Instance.Students.Add(_edit_student);
+          _last_selected_student = _edit_student;
           exit_new_mode();
-
         }
+        else
+        {
+          if (EditMode)
+          {
+            exit_edit_mode(true);
+          }
+        }
+
+        // Save to file
+        DataContainer.Instance.SaveStudent(_edit_student);
       }
       catch (Exception exc)
       {
@@ -131,25 +142,25 @@ namespace ValutazioneAlunni.MVVMviewmodels
     private void student_create_new()
     {
       enter_new_mode();
+
+      _log.Info("Crea nuovo studente");
     }
 
     private void enter_new_mode()
     {
       EditMode = true;
       NewMode = true;
-      _new_student = new StudentData(DataContainer.Instance.EvaluationScheme);
+      _edit_student = new StudentData(DataContainer.Instance.EvaluationScheme);
+      messenger_send_set_student(_edit_student);
       _last_selected_student = SelectedStudent;
-      SelectedStudent = _new_student;
-
-      RaisePropertyChanged("NewMode");
-      RaisePropertyChanged("NotNewMode");
+      SelectedStudent = _edit_student;
     }
 
     private void exit_new_mode()
     {
       EditMode = false;
       NewMode = false;
-      _new_student = null;
+      _edit_student = null;
 
       if (_last_selected_student == null)
       {
@@ -159,9 +170,43 @@ namespace ValutazioneAlunni.MVVMviewmodels
       {
         SelectedStudent = _last_selected_student;
       }
+      messenger_send_set_student(SelectedStudent);
+    }
 
-      RaisePropertyChanged("NewMode");
-      RaisePropertyChanged("NotNewMode");
+    private void student_edit()
+    {
+      enter_edit_mode();
+
+      _log.Info("Modifica dati studente <" + _edit_student + ">");
+      _log.Info("NewMode : " + NewMode);
+      _log.Info("EditMode: " + EditMode);
+      _log.Info(_edit_student.ToString());
+    }
+
+    private void enter_edit_mode()
+    {
+      EditMode = true;
+      NewMode = false;
+      _edit_student = SelectedStudent.Clone();
+      messenger_send_set_student(_edit_student);
+      _last_selected_student = SelectedStudent;
+    }
+
+    private void exit_edit_mode(bool save)
+    {
+      EditMode = false;
+      NewMode = false;
+
+      if (save)
+      {
+        // Save new student data!
+        int index = Students.IndexOf(SelectedStudent);
+        Students.Remove(SelectedStudent);
+        Students.Insert(index, _edit_student);
+        SelectedStudent = _edit_student;
+      }
+
+      messenger_send_set_student(SelectedStudent);
     }
 
     #endregion
@@ -177,6 +222,8 @@ namespace ValutazioneAlunni.MVVMviewmodels
       private set
       {
         _new_mode = value;
+        RaisePropertyChanged("NewMode");
+        RaisePropertyChanged("NotNewMode");
       }
     }
 
@@ -194,10 +241,19 @@ namespace ValutazioneAlunni.MVVMviewmodels
       {
         return _edit_mode;
       }
-      set
+      private set
       {
         _edit_mode = value;
+        RaisePropertyChanged("ReadOnlyMode");
         RaisePropertyChanged("EditMode");
+      }
+    }
+
+    public bool ReadOnlyMode
+    {
+      get
+      {
+        return !EditMode;
       }
     }
 
@@ -246,7 +302,7 @@ namespace ValutazioneAlunni.MVVMviewmodels
       }
       set
       {
-        if (_edit_mode == true)
+        if (EditMode == true)
         {
           _selected_student.FirstName = value;
         }
@@ -263,7 +319,7 @@ namespace ValutazioneAlunni.MVVMviewmodels
       }
       set
       {
-        if (_edit_mode == true)
+        if (EditMode == true)
         {
           _selected_student.LastName = value;
         }
@@ -280,7 +336,7 @@ namespace ValutazioneAlunni.MVVMviewmodels
       }
       set
       {
-        if (_edit_mode == true)
+        if (EditMode == true)
         {
           _selected_student.BirthDate = value;
         }
@@ -297,7 +353,7 @@ namespace ValutazioneAlunni.MVVMviewmodels
       }
       set
       {
-        if (_edit_mode == true)
+        if (EditMode == true)
         {
           _selected_student.Note = value;
         }
@@ -308,6 +364,36 @@ namespace ValutazioneAlunni.MVVMviewmodels
     #endregion
 
     #region commands
+
+    private ICommand _edit_student_cmd;
+    public ICommand EditCmd
+    {
+      get
+      {
+        if (_edit_student_cmd == null)
+        {
+          _edit_student_cmd = new RelayCommand(
+              param => this.edit_student(),
+              param => this.can_edit_student()
+              );
+        }
+        return _edit_student_cmd;
+      }
+    }
+
+    private bool can_edit_student()
+    {
+      if (_selected_student == null) return false;
+      if (EditMode == true) return false;
+      if (NewMode == true) return false;
+      return true;
+    }
+
+    private void edit_student()
+    {
+      student_edit();
+    }
+
 
     private ICommand _new_student_cmd;
     public ICommand NewCmd
@@ -365,7 +451,35 @@ namespace ValutazioneAlunni.MVVMviewmodels
 
     private void save()
     {
-      student_save();
+      student_save_new_or_edit();
+    }
+
+    private ICommand _cancel_cmd;
+    public ICommand CancelCmd
+    {
+      get
+      {
+        if (_cancel_cmd == null)
+        {
+          _cancel_cmd = new RelayCommand(
+              param => this.cancel(),
+              param => this.can_cancel()
+              );
+        }
+        return _cancel_cmd;
+      }
+    }
+
+    private bool can_cancel()
+    {
+      if (EditMode == false) return false;
+      return true;
+    }
+
+    private void cancel()
+    {
+      if (NewMode) exit_new_mode();
+      if (EditMode) exit_edit_mode(false);
     }
 
     #endregion

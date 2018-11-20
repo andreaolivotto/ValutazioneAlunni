@@ -4,9 +4,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ValutazioneAlunni.MVVMviews"
+             xmlns:utils="clr-namespace:ValutazioneAlunni.MVVMutils"
              mc:Ignorable="d" 
              d:DesignHeight="450"
              d:DesignWidth="600">
+
+  <UserControl.Resources>
+    <utils:FromEditModeToBackgroundColor x:Key="FromEditModeToBackgroundColor"/>
+  </UserControl.Resources>
   
   <Grid>
     <Grid.RowDefinitions>
@@ -44,21 +49,34 @@
       </Grid.ColumnDefinitions>
 
       <Label Content="Nome:" Grid.Row="0" Grid.Column="0" Style="{StaticResource TextFieldLabel_Style}"/>
-      <TextBox Text="{Binding FirstName}" Grid.Row="0" Grid.Column="1" Style="{StaticResource TextFieldValue_Style}"/>
+      <TextBox Text="{Binding FirstName}" Grid.Row="0" Grid.Column="1" 
+               IsReadOnly="{Binding ReadOnlyMode, Mode=OneWay}"
+               Background="{Binding EditMode, Converter={StaticResource FromEditModeToBackgroundColor}}"
+               Style="{StaticResource TextFieldValue_Style}"/>
 
       <Label Content="Cognome:" Grid.Row="1" Grid.Column="0" Style="{StaticResource TextFieldLabel_Style}"/>
-      <TextBox Text="{Binding LastName}" Grid.Row="1" Grid.Column="1" Style="{StaticResource TextFieldValue_Style}"/>
+      <TextBox Text="{Binding LastName}" Grid.Row="1" Grid.Column="1" 
+               IsReadOnly="{Binding ReadOnlyMode, Mode=OneWay}"
+               Background="{Binding EditMode, Converter={StaticResource FromEditModeToBackgroundColor}}"
+               Style="{StaticResource TextFieldValue_Style}"/>
 
       <Label Content="Data di nascita:" Grid.Row="2" Grid.Column="0" Style="{StaticResource TextFieldLabel_Style}"/>
       <!--<TextBox Text="{Binding BirthDate}" Grid.Row="2" Grid.Column="1" Style="{StaticResource TextFieldValue_Style}"/>-->
-      <DatePicker SelectedDate="{Binding BirthDate}" Grid.Row="2" Grid.Column="1" Style="{StaticResource DateFieldValue_Style}"/>
+      <DatePicker SelectedDate="{Binding BirthDate}" Grid.Row="2" Grid.Column="1"
+                  IsEnabled="{Binding EditMode, Mode=OneWay}"
+                  Background="{Binding EditMode, Converter={StaticResource FromEditModeToBackgroundColor}}"
+                  Style="{StaticResource DateFieldValue_Style}"/>
 
       <Label Content="Note:" Grid.Row="3" Grid.Column="0" Style="{StaticResource TextFieldLabel_Style}"/>
-      <TextBox Text="{Binding Note}" Grid.Row="3" Grid.Column="1" Style="{StaticResource TextMultilineFieldValue_Style}"/>
+      <TextBox Text="{Binding Note}" Grid.Row="3" Grid.Column="1" 
+               IsReadOnly="{Binding ReadOnlyMode, Mode=OneWay}"
+               Background="{Binding EditMode, Converter={StaticResource FromEditModeToBackgroundColor}}"
+               Style="{StaticResource TextMultilineFieldValue_Style}"/>
 
       <ScrollViewer Grid.Row="4" Grid.Column="1"
                     Margin="3,15,3,3"
-                    VerticalScrollBarVisibility="Visible">
+                    VerticalScrollBarVisibility="Visible"
+                    IsEnabled="{Binding EditMode, Mode=OneWay}">
         <Grid x:Name="grdEvaluationScheme">
         </Grid>
       </ScrollViewer>
@@ -67,13 +85,21 @@
                   Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"
                   HorizontalAlignment="Center">
 
-        <Button Content="Nuovo"               
+        <Button Content="Modifica"               
+              Style="{StaticResource BaseButton_Style}"
+              Command="{Binding EditCmd}"/>
+        
+        <Button Content="Crea nuovo"               
               Style="{StaticResource BaseButton_Style}"
               Command="{Binding NewCmd}"/>
 
         <Button Content="Salva"               
               Style="{StaticResource BaseButton_Style}"
               Command="{Binding SaveCmd}"/>
+
+        <Button Content="Annulla"               
+              Style="{StaticResource BaseButton_Style}"
+              Command="{Binding CancelCmd}"/>
 
         <!--<Button Content="Ricarica da disco"  
                 Width="120"
