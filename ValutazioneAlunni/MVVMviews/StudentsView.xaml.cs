@@ -225,9 +225,9 @@ namespace ValutazioneAlunni.MVVMviews
             ComboBox cmb = (ComboBox)ui_element;
             if (cmb.Tag.ToString() == ei.Tag)
             {
-              if (ei.EvalNumber >= 1)
+              if (ei.EvalNumber >= 0)
               {
-                cmb.SelectedIndex = (ei.EvalNumber - 1);
+                cmb.SelectedIndex = ei.EvalNumber;
               }
               else
               {

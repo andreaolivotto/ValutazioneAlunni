@@ -79,6 +79,7 @@ namespace ValutazioneAlunni.MVVMviewmodels
       foreach (StudentData sd in Students)
       {
         _log.Info("[" + idx.ToString("D2") + "] " + sd.ToString());
+        _log.Info(sd.Dump());
         idx++;
       }
     }
@@ -114,7 +115,7 @@ namespace ValutazioneAlunni.MVVMviewmodels
         _log.Info("Salva dati studente <" + _edit_student + ">");
         _log.Info("NewMode : " + NewMode);
         _log.Info("EditMode: " + EditMode);
-        _log.Info(_edit_student.ToString());
+        _log.Info(_edit_student.Dump());
 
         if (NewMode)
         {
@@ -131,7 +132,7 @@ namespace ValutazioneAlunni.MVVMviewmodels
         }
 
         // Save to file
-        DataContainer.Instance.SaveStudent(_edit_student);
+        DataContainer.Instance.SaveStudent(SelectedStudent);
       }
       catch (Exception exc)
       {
@@ -143,7 +144,8 @@ namespace ValutazioneAlunni.MVVMviewmodels
     {
       enter_new_mode();
 
-      _log.Info("Crea nuovo studente");
+      _log.Info("");
+      _log.Info("******************** Crea nuovo studente");
     }
 
     private void enter_new_mode()
@@ -152,7 +154,7 @@ namespace ValutazioneAlunni.MVVMviewmodels
       NewMode = true;
       _edit_student = new StudentData(DataContainer.Instance.EvaluationScheme);
       messenger_send_set_student(_edit_student);
-      _last_selected_student = SelectedStudent;
+      //_last_selected_student = SelectedStudent;
       SelectedStudent = _edit_student;
     }
 
@@ -177,7 +179,8 @@ namespace ValutazioneAlunni.MVVMviewmodels
     {
       enter_edit_mode();
 
-      _log.Info("Modifica dati studente <" + _edit_student + ">");
+      _log.Info("");
+      _log.Info("******************** Modifica dati studente <" + _edit_student + ">");
       _log.Info("NewMode : " + NewMode);
       _log.Info("EditMode: " + EditMode);
       _log.Info(_edit_student.ToString());
@@ -189,7 +192,10 @@ namespace ValutazioneAlunni.MVVMviewmodels
       NewMode = false;
       _edit_student = SelectedStudent.Clone();
       messenger_send_set_student(_edit_student);
+      // Keep a pointer to the current item on list
       _last_selected_student = SelectedStudent;
+      // Set the selected item to the edit copy
+      SelectedStudent = _edit_student;
     }
 
     private void exit_edit_mode(bool save)
@@ -200,10 +206,11 @@ namespace ValutazioneAlunni.MVVMviewmodels
       if (save)
       {
         // Save new student data!
-        int index = Students.IndexOf(SelectedStudent);
-        Students.Remove(SelectedStudent);
+        int index = Students.IndexOf(_last_selected_student);
+        Students.Remove(_last_selected_student);
         Students.Insert(index, _edit_student);
         SelectedStudent = _edit_student;
+        _last_selected_student = SelectedStudent;
       }
 
       messenger_send_set_student(SelectedStudent);

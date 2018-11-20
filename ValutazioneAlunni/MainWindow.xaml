@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:ValutazioneAlunni"
         mc:Ignorable="d"
         Title="MainWindow" 
-        Width="1200"
-        Height="800"
+        Width="1600"
+        Height="900"
         WindowStartupLocation="CenterScreen">
   
     <Grid x:Name="MainGrid" Margin="3">

@@ -46,9 +46,10 @@ namespace ValutazioneAlunni.MVVMmodels
     public string EvaluationSchemeRelease;
     public string EvaluationSchemeDate;
 
+    public string UUID;
     public string FirstName;
     public string LastName;
-    public DateTime BirthDate;
+    public DateTime BirthDate = DateTime.Now;
     public string Note;
 
     public List<StudentEvaluationItem> EvaluationItems;
@@ -57,10 +58,12 @@ namespace ValutazioneAlunni.MVVMmodels
 
     public StudentData()
     {
+      UUID = Guid.NewGuid().ToString("N");
     }
 
     public StudentData(EvaluationScheme evaluation_scheme)
     {
+      UUID = Guid.NewGuid().ToString("N");
       load_evaluation_scheme(evaluation_scheme);
     }
 
@@ -75,14 +78,34 @@ namespace ValutazioneAlunni.MVVMmodels
 
     #endregion
 
-    #region ICloneable Members
+    #region public functions
 
     public StudentData Clone()
     {
       return (StudentData)this.MemberwiseClone();
     }
 
+    public string Dump()
+    {
+      StringBuilder sb = new StringBuilder();
+
+      sb.AppendLine("UUID     : " + UUID);
+      sb.AppendLine("FirstName: " + FirstName);
+      sb.AppendLine("LastName : " + LastName);
+      sb.AppendLine("BirthDate: " + BirthDate.ToString());
+      sb.AppendLine("Note     : " + Note);
+
+      foreach (StudentEvaluationItem ei in EvaluationItems)
+      {
+        sb.AppendLine(ei.Tag + ": " + ei.EvalNumber + " (" + ei.LastChange.ToString() + ")");
+      }
+
+      return sb.ToString();
+    }
+
     #endregion
+
+    #region private functions
 
     private void load_evaluation_scheme(EvaluationScheme evaluation_scheme)
     {
@@ -117,5 +140,7 @@ namespace ValutazioneAlunni.MVVMmodels
       {
       }
     }
+
+    #endregion
   }
 }

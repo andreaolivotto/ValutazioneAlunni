@@ -358,7 +358,7 @@ namespace ValutazioneAlunni.Data
 
     private string get_student_file_name(StudentData s)
     {
-      return "student_" + s.LastName + "_" + s.FirstName + ".xml";
+      return "student_" + s.UUID + ".xml";
     }
 
     private bool students_load_from_file()
