@@ -1,0 +1,71 @@
+﻿<UserControl x:Class="ValutazioneAlunni.MVVMviews.ExportView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ValutazioneAlunni.MVVMviews"
+             xmlns:utils="clr-namespace:ValutazioneAlunni.MVVMutils"
+             mc:Ignorable="d" 
+             d:DesignHeight="450"
+             d:DesignWidth="800">
+  
+  <UserControl.Resources>
+    <utils:FromEditModeToBackgroundColor x:Key="FromEditModeToBackgroundColor"/>
+  </UserControl.Resources>
+
+  <Grid Background="White">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition/>
+      <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="200"/>
+      <ColumnDefinition/>
+    </Grid.ColumnDefinitions>
+
+    <Label Content="Nome insegnante:" Grid.Row="0" Grid.Column="0" Style="{StaticResource TextFieldLabel_Style}"/>
+    <TextBox Text="{Binding TeacherFirstName}" Grid.Row="0" Grid.Column="1" 
+             IsReadOnly="{Binding ReadOnlyMode, Mode=OneWay}"
+             Background="{Binding EditMode, Converter={StaticResource FromEditModeToBackgroundColor}}"
+             Style="{StaticResource TextFieldValue_Style}"/>
+
+    <Label Content="Cognome insegnante:" Grid.Row="1" Grid.Column="0" Style="{StaticResource TextFieldLabel_Style}"/>
+    <TextBox Text="{Binding TeacherLastName}" Grid.Row="1" Grid.Column="1" 
+             IsReadOnly="{Binding ReadOnlyMode, Mode=OneWay}"
+             Background="{Binding EditMode, Converter={StaticResource FromEditModeToBackgroundColor}}"
+             Style="{StaticResource TextFieldValue_Style}"/>
+
+    <Label Content="Titolo valutazione:" Grid.Row="2" Grid.Column="0" Style="{StaticResource TextFieldLabel_Style}"/>
+    <StackPanel Orientation="Vertical"
+                Grid.Row="2" Grid.Column="1"
+                Margin="0">
+      <TextBox Text="{Binding EvaluationTitle}" 
+               IsReadOnly="{Binding ReadOnlyMode, Mode=OneWay}"
+               Background="{Binding EditMode, Converter={StaticResource FromEditModeToBackgroundColor}}"
+               Style="{StaticResource TextFieldValue_Style}"/>
+      <Label Content="Esempio: Valutazione intermedia" Style="{StaticResource CommentLabel_Style}"/>
+    </StackPanel>
+
+    <Label Content="Data:" Grid.Row="3" Grid.Column="0" Style="{StaticResource TextFieldLabel_Style}"/>
+    <TextBox Text="{Binding DateStringName}" Grid.Row="3" Grid.Column="1" 
+               IsReadOnly="{Binding ReadOnlyMode, Mode=OneWay}"
+               Background="{Binding EditMode, Converter={StaticResource FromEditModeToBackgroundColor}}"
+               Style="{StaticResource TextFieldValue_Style}"/>
+
+    <StackPanel Orientation="Horizontal"
+                  Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"
+                  HorizontalAlignment="Center">
+
+      <Button Content="Esporta tutti le valutazion in formato Word"       
+              Width="250"
+              Style="{StaticResource BaseButton_Style}"
+              Command="{Binding ExportAllWordCmd}"/>
+
+    </StackPanel>
+
+  </Grid>
+</UserControl>

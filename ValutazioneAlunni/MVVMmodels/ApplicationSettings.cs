@@ -12,15 +12,32 @@ namespace ValutazioneAlunni.MVVMmodels
   [Serializable]
   public class ApplicationSettings
   {
+    #region public fields
+
     public string WorkingFolder = "ERR";
+    public string TeacherFirstName = "Nome";
+    public string TeacherLastName = "Cognome";
+    public string EvaluationTitle = "Titolo";
+
+    #endregion
+
+    #region private constants
 
     private const string APPLICATION_SETTINGS_FILE_NAME = "application_settings.xml";
+
+    #endregion
+
+    #region private variables
 
     private Log _log = Log.Instance;
 
     // http://csharpindepth.com/Articles/General/Singleton.aspx
     private static ApplicationSettings _instance = null;
     private static readonly object _padlock = new object();
+
+    #endregion
+
+    #region init and deinit
 
     private ApplicationSettings()
     {
@@ -30,6 +47,10 @@ namespace ValutazioneAlunni.MVVMmodels
     {
       save(this);
     }
+
+    #endregion
+
+    #region singleton instance
 
     public static ApplicationSettings Instance
     {
@@ -47,6 +68,10 @@ namespace ValutazioneAlunni.MVVMmodels
       }
     }
 
+    #endregion
+
+    #region public functions
+
     public override string ToString()
     {
       StringBuilder sb = new StringBuilder();
@@ -56,6 +81,8 @@ namespace ValutazioneAlunni.MVVMmodels
 
       return sb.ToString();
     }
+
+    #endregion
 
     #region private functions
 

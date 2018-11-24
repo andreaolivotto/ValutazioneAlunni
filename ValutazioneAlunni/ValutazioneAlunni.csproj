@@ -61,11 +61,15 @@
     <Compile Include="MVVMutils\RelayCommand.cs" />
     <Compile Include="MVVMutils\WPFMessengerClass.cs" />
     <Compile Include="MVVMviewmodels\BaseViewModel.cs" />
+    <Compile Include="MVVMviewmodels\ExportViewModel.cs" />
     <Compile Include="MVVMviewmodels\MainViewModel.cs" />
     <Compile Include="MVVMviewmodels\EvaluationSchemeViewModel.cs" />
     <Compile Include="MVVMviewmodels\StudentsViewModel.cs" />
     <Compile Include="MVVMviews\EvaluationSchemeView.xaml.cs">
       <DependentUpon>EvaluationSchemeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVMviews\ExportView.xaml.cs">
+      <DependentUpon>ExportView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVVMviews\StudentsView.xaml.cs">
       <DependentUpon>StudentsView.xaml</DependentUpon>
@@ -85,6 +89,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="MVVMviews\EvaluationSchemeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVMviews\ExportView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -408,7 +408,6 @@ namespace ValutazioneAlunni.MVVMviewmodels
       student_edit();
     }
 
-
     private ICommand _new_student_cmd;
     public ICommand NewCmd
     {

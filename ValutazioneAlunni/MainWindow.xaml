@@ -58,7 +58,11 @@
           <Grid x:Name="TabEvaluationSchemeContainer"/>
         </TabItem>
 
-        <TabItem x:Name="TabLogs" Header="Logs">
+      <TabItem x:Name="TabExport" Header="Esportazione">
+        <Grid x:Name="TabExportContainer"/>
+      </TabItem>
+
+      <TabItem x:Name="TabLogs" Header="Logs">
           <Grid Margin="5">
           <TextBox x:Name="txtLogs"
                    Grid.Row="0" Grid.Column="0"

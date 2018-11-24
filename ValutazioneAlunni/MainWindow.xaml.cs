@@ -79,6 +79,9 @@ namespace ValutazioneAlunni
 
       TabEvaluationSchemeContainer.Children.Add(new EvaluationSchemeView());
       TabEvaluationSchemeContainer.DataContext = new EvaluationSchemeViewModel();
+
+      TabExportContainer.Children.Add(new ExportView());
+      TabExportContainer.DataContext = new ExportViewModel();
     }
 
     #endregion
