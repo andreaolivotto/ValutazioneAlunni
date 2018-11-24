@@ -19,7 +19,7 @@ namespace ValutazioneAlunni.MVVMmodels
       return "CHAPTER=" + chapter_idx.ToString() + "_" + "SECTION=" + section_idx.ToString();
     }
 
-    public static void DecodeTag(string tag, ref int chapter_idx, ref int section_idx)
+    public static void DecodeTag(string tag, out int chapter_idx, out int section_idx)
     {
       try
       {
@@ -30,7 +30,7 @@ namespace ValutazioneAlunni.MVVMmodels
         if (tokens.Length != 2) return;
 
         chapter_idx = int.Parse(tokens[0].Replace("CHAPTER=", ""));
-        section_idx = int.Parse(tokens[0].Replace("SECTION=", ""));
+        section_idx = int.Parse(tokens[1].Replace("SECTION=", ""));
       }
       catch
       {
@@ -65,6 +65,28 @@ namespace ValutazioneAlunni.MVVMmodels
     {
       UUID = Guid.NewGuid().ToString("N");
       load_evaluation_scheme(evaluation_scheme);
+    }
+
+    public int GetEvaluationLevel(int chapter_idx, int section_idx)
+    {
+      try
+      {
+        foreach (StudentEvaluationItem ei in EvaluationItems)
+        {
+          int ch = 0;
+          int sec = 0;
+          StudentEvaluationItem.DecodeTag(ei.Tag, out ch, out sec);
+          if ((chapter_idx == ch) && (section_idx == sec))
+          {
+            return ei.EvalNumber;
+          }
+        }
+        return -1;
+      }
+      catch
+      {
+        return -1;
+      }
     }
 
     #endregion

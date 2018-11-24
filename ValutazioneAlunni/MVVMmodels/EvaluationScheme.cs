@@ -156,5 +156,17 @@ namespace ValutazioneAlunni.MVVMmodels
 
       return sb.ToString();
     }
+
+    public string GetLevelDescription(int chapter_idx, int section_idx, int level_value)
+    {
+      try
+      {
+        return Chapters[chapter_idx].Sections[section_idx].Levels[level_value].Description;
+      }
+      catch (Exception exc)
+      {
+        return "ERROR: " + exc.Message;
+      }
+    }
   }
 }

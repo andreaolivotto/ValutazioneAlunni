@@ -12,11 +12,12 @@
   <UserControl.Resources>
     <utils:FromEditModeToBackgroundColor x:Key="FromEditModeToBackgroundColor"/>
   </UserControl.Resources>
-  
-  <Grid>
+
+  <Grid Background="White">
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto"/>
       <RowDefinition/>
+      <RowDefinition Height="Auto"/>
       <RowDefinition Height="Auto"/>
     </Grid.RowDefinitions>
     <Grid.ColumnDefinitions>
@@ -28,92 +29,96 @@
            Grid.Column="0" Grid.Row="0"/>
     <ListView ItemsSource="{Binding Students}"
               SelectedItem="{Binding SelectedStudent}"
-              Grid.Column="0" Grid.Row="1"
+              Grid.Column="0" Grid.Row="1" Grid.RowSpan="3"
               VerticalAlignment="Stretch"
               VerticalContentAlignment="Stretch"
               ScrollViewer.VerticalScrollBarVisibility="Visible"/>
     
     <!-- detail -->
-    <Grid Margin="10,0,0,0" Grid.Column="1" Grid.Row="1" Background="White">
-      <Grid.RowDefinitions>
-        <RowDefinition Height="Auto"/>
-        <RowDefinition Height="Auto"/>
-        <RowDefinition Height="Auto"/>
-        <RowDefinition Height="Auto"/>
-        <RowDefinition/>
-        <RowDefinition Height="35"/>
-      </Grid.RowDefinitions>
-      <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="120"/>
-        <ColumnDefinition/>
-      </Grid.ColumnDefinitions>
+    <ScrollViewer VerticalScrollBarVisibility="Visible"
+                  Grid.Column="1" Grid.Row="0" Grid.RowSpan="2"
+                  Margin="10,0,0,0"
+                  Padding="0,0,5,0">
+      <Grid>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="120"/>
+          <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
 
-      <Label Content="Nome:" Grid.Row="0" Grid.Column="0" Style="{StaticResource TextFieldLabel_Style}"/>
-      <TextBox Text="{Binding FirstName}" Grid.Row="0" Grid.Column="1" 
+        <Label Content="Nome:" Grid.Row="0" Grid.Column="0" Style="{StaticResource TextFieldLabel_Style}"/>
+        <TextBox Text="{Binding FirstName}" Grid.Row="0" Grid.Column="1" 
                IsReadOnly="{Binding ReadOnlyMode, Mode=OneWay}"
                Background="{Binding EditMode, Converter={StaticResource FromEditModeToBackgroundColor}}"
                Style="{StaticResource TextFieldValue_Style}"/>
 
-      <Label Content="Cognome:" Grid.Row="1" Grid.Column="0" Style="{StaticResource TextFieldLabel_Style}"/>
-      <TextBox Text="{Binding LastName}" Grid.Row="1" Grid.Column="1" 
+        <Label Content="Cognome:" Grid.Row="1" Grid.Column="0" Style="{StaticResource TextFieldLabel_Style}"/>
+        <TextBox Text="{Binding LastName}" Grid.Row="1" Grid.Column="1" 
                IsReadOnly="{Binding ReadOnlyMode, Mode=OneWay}"
                Background="{Binding EditMode, Converter={StaticResource FromEditModeToBackgroundColor}}"
                Style="{StaticResource TextFieldValue_Style}"/>
 
-      <Label Content="Data di nascita:" Grid.Row="2" Grid.Column="0" Style="{StaticResource TextFieldLabel_Style}"/>
-      <!--<TextBox Text="{Binding BirthDate}" Grid.Row="2" Grid.Column="1" Style="{StaticResource TextFieldValue_Style}"/>-->
-      <DatePicker SelectedDate="{Binding BirthDate}" Grid.Row="2" Grid.Column="1"
+        <Label Content="Data di nascita:" Grid.Row="2" Grid.Column="0" Style="{StaticResource TextFieldLabel_Style}"/>
+        <!--<TextBox Text="{Binding BirthDate}" Grid.Row="2" Grid.Column="1" Style="{StaticResource TextFieldValue_Style}"/>-->
+        <DatePicker SelectedDate="{Binding BirthDate}" Grid.Row="2" Grid.Column="1"
                   IsEnabled="{Binding EditMode, Mode=OneWay}"
                   Background="{Binding EditMode, Converter={StaticResource FromEditModeToBackgroundColor}}"
                   Style="{StaticResource DateFieldValue_Style}"/>
 
-      <Label Content="Note:" Grid.Row="3" Grid.Column="0" Style="{StaticResource TextFieldLabel_Style}"/>
-      <TextBox Text="{Binding Note}" Grid.Row="3" Grid.Column="1" 
+        <Label Content="Note:" Grid.Row="3" Grid.Column="0" Style="{StaticResource TextFieldLabel_Style}"/>
+        <TextBox Text="{Binding Note}" Grid.Row="3" Grid.Column="1" 
                IsReadOnly="{Binding ReadOnlyMode, Mode=OneWay}"
                Background="{Binding EditMode, Converter={StaticResource FromEditModeToBackgroundColor}}"
                Style="{StaticResource TextMultilineFieldValue_Style}"/>
 
-      <ScrollViewer Grid.Row="4" Grid.Column="1"
-                    Margin="3,15,3,3"
-                    VerticalScrollBarVisibility="Visible">
-        <Grid x:Name="grdEvaluationScheme"/>
-      </ScrollViewer>
+        <!-- student evaluation data -->
+        <Grid x:Name="grdEvaluationScheme"
+              Margin="5,15,5,5"
+              Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"/>
 
-      <StackPanel Orientation="Horizontal"
-                  Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"
-                  HorizontalAlignment="Center">
+      </Grid>
 
-        <Button Content="Modifica"               
+    </ScrollViewer>
+
+    <Rectangle Grid.Row="2" Grid.Column="1"
+               Fill="#FFA0A0A0"
+               Height="1"               
+               Margin="5,10,5,10"/>
+
+    <!-- buttons -->
+    <StackPanel Orientation="Horizontal"
+                Grid.Row="3" Grid.Column="1"
+                HorizontalAlignment="Center"
+                Margin="0,0,0,5">
+      <Button Content="Modifica"               
               Style="{StaticResource BaseButton_Style}"
               Command="{Binding EditCmd}"/>
-        
-        <Button Content="Crea nuovo"               
+      <Button Content="Crea nuovo"               
               Style="{StaticResource BaseButton_Style}"
               Command="{Binding NewCmd}"/>
-
-        <Button Content="Esporta in Word"   
+      <Button Content="Esporta in Word"   
                 Width="100"
                 Style="{StaticResource BaseButton_Style}"
                 Command="{Binding ExportWordCmd}"/>
-
-        <Button Content="Salva"               
+      <Button Content="Salva"               
                 Margin="20,0,3,0"
               Style="{StaticResource BaseButton_Style}"
               Command="{Binding SaveCmd}"/>
-
-        <Button Content="Annulla"               
+      <Button Content="Annulla"               
               Style="{StaticResource BaseButton_Style}"
               Command="{Binding CancelCmd}"/>
-
-        <!--<Button Content="Ricarica da disco"  
+      <!--<Button Content="Ricarica da disco"  
                 Width="120"
               Style="{StaticResource BaseButton_Style}"
               Command="{Binding ReloadCmd}"/>-->
-
-      </StackPanel>
-      
-    </Grid>
-
+    </StackPanel>
+    
   </Grid>
   
 </UserControl>

@@ -125,13 +125,15 @@ namespace ValutazioneAlunni.MVVMviews
         rd.Height = GridLength.Auto;
         grdEvaluationScheme.RowDefinitions.Add(rd);
         tb = new TextBox();
-        tb.Text = chapter.Name;
+        tb.Text = (chapter_idx + 1).ToString() + ". " + chapter.Name;
         tb.TextWrapping = TextWrapping.Wrap;
         tb.IsReadOnly = true;
         tb.FontSize = 22;
         tb.SetValue(TextBlock.FontWeightProperty, FontWeights.Bold);
         tb.BorderThickness = new Thickness(0,0,0,1);
-        tb.Margin = new Thickness(3, 20, 3, 3);
+        //tb.Background = new SolidColorBrush(Color.FromRgb(240, 240, 240));
+        tb.Padding = new Thickness(0, 2, 0, 2);
+        tb.Margin = new Thickness(3, 40, 3, 3);
         grdEvaluationScheme.Children.Add(tb);
         Grid.SetRow(tb, grid_row);
         grid_row++;
@@ -151,6 +153,7 @@ namespace ValutazioneAlunni.MVVMviews
         grid_row++;
 
         // Sections
+        section_idx = 0;
         foreach (EvaluationSection sec in chapter.Sections)
         {
           // Section title (name)
@@ -158,13 +161,13 @@ namespace ValutazioneAlunni.MVVMviews
           rd.Height = GridLength.Auto;
           grdEvaluationScheme.RowDefinitions.Add(rd);
           tb = new TextBox();
-          tb.Text = sec.Name;
+          tb.Text = (chapter_idx + 1).ToString() + "." + (section_idx + 1).ToString() + ". "  + sec.Name;
           tb.TextWrapping = TextWrapping.Wrap;
           tb.IsReadOnly = true;
           tb.FontSize = 14;
           tb.SetValue(TextBlock.FontWeightProperty, FontWeights.Bold);
           tb.BorderThickness = new Thickness(0);
-          tb.Margin = new Thickness(3, 10, 3, 3);
+          tb.Margin = new Thickness(3, 20, 3, 3);
           grdEvaluationScheme.Children.Add(tb);
           Grid.SetRow(tb, grid_row);
           grid_row++;
@@ -193,7 +196,6 @@ namespace ValutazioneAlunni.MVVMviews
           cmb.Margin = new Thickness(3, 3, 3, 3);
           cmb.SelectionChanged += Cmb_SelectionChanged;
           cmb.HorizontalAlignment = HorizontalAlignment.Left;
-          //cmb.SelectionChanged += Cmb_SelectionChanged;
           for (idx=0; idx<sec.Levels.Count; idx++)
           {
             ComboBoxItem i = new ComboBoxItem();
@@ -222,7 +224,7 @@ namespace ValutazioneAlunni.MVVMviews
     {
       if (_loading_evaluation_scheme) return;
 
-      update_current_student();
+      update_current_student((ComboBox)sender);
     }
 
     private void on_set_student()
@@ -263,36 +265,51 @@ namespace ValutazioneAlunni.MVVMviews
       _load_student = false;
     }
 
-    private void update_current_student()
+    private void update_current_student(ComboBox cmb)
     {
       if (_evaluation_scheme == null) return;
       if (_student == null) return;
 
       if (_load_student) return;
-
       foreach (StudentEvaluationItem ei in _student.EvaluationItems)
       {
-        int idx;
-        for (idx = 0; idx < grdEvaluationScheme.Children.Count; idx++)
+        if (cmb.Tag.ToString() == ei.Tag)
         {
-          UIElement ui_element = grdEvaluationScheme.Children[idx];
-          if (ui_element is ComboBox)
+          if (cmb.SelectedIndex < 0)
           {
-            ComboBox cmb = (ComboBox)ui_element;
-            if (cmb.Tag.ToString() == ei.Tag)
-            {
-              if (cmb.SelectedIndex < 0)
-              {
-                ei.EvalNumber = -1;
-              }
-              else
-              {
-                ei.EvalNumber = cmb.SelectedIndex;
-              }
-            }
+            ei.EvalNumber = -1;
+          }
+          else
+          {
+            ei.EvalNumber = cmb.SelectedIndex;
           }
         }
       }
+
+
+      //foreach (StudentEvaluationItem ei in _student.EvaluationItems)
+      //{
+      //  int idx;
+      //  for (idx = 0; idx < grdEvaluationScheme.Children.Count; idx++)
+      //  {
+      //    UIElement ui_element = grdEvaluationScheme.Children[idx];
+      //    if (ui_element is ComboBox)
+      //    {
+      //      ComboBox cmb = (ComboBox)ui_element;
+      //      if (cmb.Tag.ToString() == ei.Tag)
+      //      {
+      //        if (cmb.SelectedIndex < 0)
+      //        {
+      //          ei.EvalNumber = -1;
+      //        }
+      //        else
+      //        {
+      //          ei.EvalNumber = cmb.SelectedIndex;
+      //        }
+      //      }
+      //    }
+      //  }
+      //}
     }
 
     #endregion

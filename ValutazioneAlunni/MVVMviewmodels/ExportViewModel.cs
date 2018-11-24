@@ -9,6 +9,8 @@ using System.Windows.Input;
 using ValutazioneAlunni.MVVMmodels;
 using ValutazioneAlunni.MVVMutils;
 using ValutazioneAlunni.Utilities;
+using System.Windows;
+using ValutazioneAlunni.Data;
 
 namespace ValutazioneAlunni.MVVMviewmodels
 {
@@ -54,6 +56,8 @@ namespace ValutazioneAlunni.MVVMviewmodels
     {
       XWPFParagraph p;
       XWPFRun r;
+      int chapter_idx;
+      int section_idx;
 
       try
       {
@@ -76,7 +80,7 @@ namespace ValutazioneAlunni.MVVMviewmodels
         // Title
         p = doc.CreateParagraph();
         p.Alignment = ParagraphAlignment.CENTER;
-        p.VerticalAlignment = TextAlignment.CENTER;
+        p.VerticalAlignment = NPOI.XWPF.UserModel.TextAlignment.CENTER;
         p.SpacingAfter = 500;
         r = p.CreateRun();
         r.IsBold = true;
@@ -101,19 +105,58 @@ namespace ValutazioneAlunni.MVVMviewmodels
 
         // Student
         p = doc.CreateParagraph();
+        p.SpacingAfter = 500;
         p.Alignment = ParagraphAlignment.LEFT;
         r = p.CreateRun();
         r.FontSize = 12;
         r.FontFamily = font_family;
         r.SetText("Studente: " + s.FirstName + " " + s.LastName);
 
+        // Evaluation
+        chapter_idx = 0;
+        foreach (EvaluationChapter chapter in DataContainer.Instance.EvaluationScheme.Chapters)
+        {
+          // Student
+          p = doc.CreateParagraph();
+          p.Alignment = ParagraphAlignment.LEFT;
+          p.SpacingAfter = 300;
+          r = p.CreateRun();
+          r.FontSize = 16;
+          r.IsBold = true;
+          r.FontFamily = font_family;
+          r.SetText(chapter.Name);
 
+          section_idx = 0;
+          StringBuilder sb = new StringBuilder();
+          foreach (EvaluationSection section in chapter.Sections)
+          {
+            int level = s.GetEvaluationLevel(chapter_idx, section_idx);
+            if (level >= 0)
+            {
+              sb.Append(DataContainer.Instance.EvaluationScheme.GetLevelDescription(chapter_idx, section_idx, level) + " ");
+            }
+            section_idx++;
+          }
+          p = doc.CreateParagraph();
+          p.Alignment = ParagraphAlignment.LEFT;
+          p.SpacingAfter = 300;
+          r = p.CreateRun();
+          r.FontSize = 12;
+          r.FontFamily = font_family;
+          r.SetText(sb.ToString());
+          chapter_idx++;
+        }
+
+
+        // Save to disk
         string word_file_name = s.LastName + "_" + s.FirstName + "_" + DateTime.Now.ToString("dd-MM-yyyy_hh-mm") + ".docx";
         _log.Info("Nome file               : " + word_file_name);
         string complete_word_file_name = Path.Combine(_settings.ExportFolder, word_file_name);
         FileStream out1 = new FileStream(complete_word_file_name, FileMode.Create);
         doc.Write(out1);
         out1.Close();
+
+        MessageBoxResult result = MessageBox.Show("Valutazione studente esportata in formato Word!", "Esportazione riuscita!", MessageBoxButton.OK);
 
         return true;
       }
