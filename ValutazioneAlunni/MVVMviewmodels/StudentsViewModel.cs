@@ -472,6 +472,36 @@ namespace ValutazioneAlunni.MVVMviewmodels
       student_save_new_or_edit();
     }
 
+    private ICommand _export_word_cmd;
+    public ICommand ExportWordCmd
+    {
+      get
+      {
+        if (_export_word_cmd == null)
+        {
+          _export_word_cmd = new RelayCommand(
+              param => this.export_word(),
+              param => this.can_export_word()
+              );
+        }
+        return _export_word_cmd;
+      }
+    }
+
+    private bool can_export_word()
+    {
+      if (_selected_student == null) return false;
+      if (_selected_student.FirstName == "") return false;
+      if (_selected_student.LastName == "") return false;
+      if (EditMode == true) return false;
+      return true;
+    }
+
+    private void export_word()
+    {
+      messenger_send_export_student_word(_selected_student);
+    }
+
     private ICommand _cancel_cmd;
     public ICommand CancelCmd
     {

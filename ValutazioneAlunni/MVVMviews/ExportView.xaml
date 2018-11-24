@@ -72,7 +72,7 @@
               Style="{StaticResource BaseButton_Style}"
               Command="{Binding SetExportFolderCmd}"/>
 
-      <Button Content="Esporta tutti le valutazion in formato Word"       
+      <Button Content="Esporta tutti le valutazioni in formato Word"       
               Width="250"
               Style="{StaticResource BaseButton_Style}"
               Command="{Binding ExportAllWordCmd}"/>

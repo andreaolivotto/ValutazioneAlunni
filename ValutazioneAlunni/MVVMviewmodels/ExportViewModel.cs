@@ -1,5 +1,7 @@
-﻿using System;
+﻿using NPOI.XWPF.UserModel;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,6 +28,8 @@ namespace ValutazioneAlunni.MVVMviewmodels
     public ExportViewModel()
     {
       EditMode = true;
+
+      messenger_init();
     }
 
     #endregion
@@ -39,20 +43,85 @@ namespace ValutazioneAlunni.MVVMviewmodels
 
     private void messenger_export_student_word(StudentData s)
     {
+      word_export_student(s);
     }
 
     #endregion
 
-    #region private functions
+    #region private functions - word
 
-    private void choose_export_folder()
+    private bool word_export_student(StudentData s)
     {
+      XWPFParagraph p;
+      XWPFRun r;
 
-    }
+      try
+      {
+        _log.Info("Esportazione sudente in Word...");
+        _log.Info(s.Dump());
+        _log.Info("Cartella di esportazione: " + _settings.ExportFolder);
 
-    private void export_student_word(StudentData s)
-    {
+        if (Directory.Exists(_settings.ExportFolder) == false)
+        {
+          _log.Error("Errore! La cartella di esportazione non esiste!");
+          return false;
+        }
 
+        // see https://github.com/tonyqus/npoi/blob/master/examples/xwpf/SimpleDocument/Program.cs
+
+        XWPFDocument doc = new XWPFDocument();
+
+        string font_family = "Courier New";
+
+        // Title
+        p = doc.CreateParagraph();
+        p.Alignment = ParagraphAlignment.CENTER;
+        p.VerticalAlignment = TextAlignment.CENTER;
+        p.SpacingAfter = 500;
+        r = p.CreateRun();
+        r.IsBold = true;
+        r.FontSize = 16;
+        r.FontFamily = font_family;
+        r.SetText(_settings.EvaluationTitle);
+
+        // Header: teacher, data
+        p = doc.CreateParagraph();
+        p.Alignment = ParagraphAlignment.LEFT;
+        r = p.CreateRun();
+        r.FontSize = 12;
+        r.FontFamily = font_family;
+        r.SetText("Insegnante: " + _settings.TeacherFirstName + " " + _settings.TeacherLastName);
+        p = doc.CreateParagraph();
+        p.Alignment = ParagraphAlignment.LEFT;
+        p.SpacingAfter = 500;
+        r = p.CreateRun();
+        r.FontSize = 12;
+        r.FontFamily = font_family;
+        r.SetText("Data: " + DateStringName);
+
+        // Student
+        p = doc.CreateParagraph();
+        p.Alignment = ParagraphAlignment.LEFT;
+        r = p.CreateRun();
+        r.FontSize = 12;
+        r.FontFamily = font_family;
+        r.SetText("Studente: " + s.FirstName + " " + s.LastName);
+
+
+        string word_file_name = s.LastName + "_" + s.FirstName + "_" + DateTime.Now.ToString("dd-MM-yyyy_hh-mm") + ".docx";
+        _log.Info("Nome file               : " + word_file_name);
+        string complete_word_file_name = Path.Combine(_settings.ExportFolder, word_file_name);
+        FileStream out1 = new FileStream(complete_word_file_name, FileMode.Create);
+        doc.Write(out1);
+        out1.Close();
+
+        return true;
+      }
+      catch (Exception exc)
+      {
+        _log.Error("Exception in export_student_word(): " + exc.Message);
+        return false;
+      }
     }
 
     #endregion
@@ -214,11 +283,12 @@ namespace ValutazioneAlunni.MVVMviewmodels
 
     private bool can_export_all_word()
     {
-      return true;
+      return false;
     }
 
     private void export_all_word()
     {
+      // TODO
     }
 
     #endregion

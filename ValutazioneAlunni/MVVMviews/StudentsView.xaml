@@ -91,11 +91,13 @@
               Style="{StaticResource BaseButton_Style}"
               Command="{Binding NewCmd}"/>
 
-        <Button Content="Esporta in Word"               
-              Style="{StaticResource BaseButton_Style}"
-              Command="{Binding ExportWordCmd}"/>
+        <Button Content="Esporta in Word"   
+                Width="100"
+                Style="{StaticResource BaseButton_Style}"
+                Command="{Binding ExportWordCmd}"/>
 
         <Button Content="Salva"               
+                Margin="20,0,3,0"
               Style="{StaticResource BaseButton_Style}"
               Command="{Binding SaveCmd}"/>
 
