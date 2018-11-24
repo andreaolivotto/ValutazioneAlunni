@@ -20,6 +20,7 @@
       <RowDefinition Height="Auto"/>
       <RowDefinition Height="Auto"/>
       <RowDefinition Height="Auto"/>
+      <RowDefinition Height="Auto"/>
       <RowDefinition/>
       <RowDefinition Height="Auto"/>
     </Grid.RowDefinitions>
@@ -63,15 +64,19 @@
              Background="{Binding true, Converter={StaticResource FromEditModeToBackgroundColor}}"
              Style="{StaticResource TextFieldValue_Style}"/>
 
-    <StackPanel Orientation="Horizontal"
-                  Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2"
-                  HorizontalAlignment="Center">
+    <Label Content="Altre impostazioni" Grid.Row="5" Grid.Column="0" Style="{StaticResource TextFieldLabel_Style}"/>
+    <CheckBox Grid.Row="5" Grid.Column="1"
+              Content="Apri file Word dopo l'esportazione"
+              IsChecked="{Binding OpenAfterExport}"
+              Style="{StaticResource BaseCheckBox_Style}"/>
 
+    <StackPanel Orientation="Horizontal"
+                Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2"
+                HorizontalAlignment="Center">
       <Button Content="Imposta cartella di esportazione" 
               Width="180"
               Style="{StaticResource BaseButton_Style}"
               Command="{Binding SetExportFolderCmd}"/>
-
       <Button Content="Esporta tutti le valutazioni in formato Word"       
               Width="250"
               Style="{StaticResource BaseButton_Style}"

@@ -20,6 +20,8 @@ namespace ValutazioneAlunni.MVVMmodels
     public string TeacherLastName = "Cognome";
     public string EvaluationTitle = "Titolo";
 
+    public bool OpenAfterExport = false;
+
     #endregion
 
     #region private constants

@@ -11,6 +11,8 @@ using ValutazioneAlunni.MVVMutils;
 using ValutazioneAlunni.Utilities;
 using System.Windows;
 using ValutazioneAlunni.Data;
+using System.Diagnostics;
+using NPOI.OpenXmlFormats.Wordprocessing;
 
 namespace ValutazioneAlunni.MVVMviewmodels
 {
@@ -52,6 +54,11 @@ namespace ValutazioneAlunni.MVVMviewmodels
 
     #region private functions - word
 
+    private ulong mm_to_twip(int mm)
+    {
+      return (ulong)((1440.0f * mm) / 25.4f);
+    }
+
     private bool word_export_student(StudentData s)
     {
       XWPFParagraph p;
@@ -74,6 +81,12 @@ namespace ValutazioneAlunni.MVVMviewmodels
         // see https://github.com/tonyqus/npoi/blob/master/examples/xwpf/SimpleDocument/Program.cs
 
         XWPFDocument doc = new XWPFDocument();
+        doc.Document.body.sectPr = new CT_SectPr();
+        CT_PageMar margin = doc.Document.body.sectPr.pgMar;
+        margin.top = mm_to_twip(15).ToString();
+        margin.bottom = mm_to_twip(15).ToString();
+        margin.left = mm_to_twip(15);
+        margin.right = mm_to_twip(15);
 
         string font_family = "Courier New";
 
@@ -101,16 +114,22 @@ namespace ValutazioneAlunni.MVVMviewmodels
         r = p.CreateRun();
         r.FontSize = 12;
         r.FontFamily = font_family;
-        r.SetText("Data: " + DateStringName);
+        r.SetText("Data      : " + DateStringName);
 
         // Student
+        p = doc.CreateParagraph();
+        p.Alignment = ParagraphAlignment.LEFT;
+        r = p.CreateRun();
+        r.FontSize = 12;
+        r.FontFamily = font_family;
+        r.SetText("Studente       : " + s.FirstName + " " + s.LastName);
         p = doc.CreateParagraph();
         p.SpacingAfter = 500;
         p.Alignment = ParagraphAlignment.LEFT;
         r = p.CreateRun();
         r.FontSize = 12;
         r.FontFamily = font_family;
-        r.SetText("Studente: " + s.FirstName + " " + s.LastName);
+        r.SetText("Data di nascita: " + s.BirthDate.ToString("dd/MM/yyyy"));
 
         // Evaluation
         chapter_idx = 0;
@@ -119,7 +138,7 @@ namespace ValutazioneAlunni.MVVMviewmodels
           // Student
           p = doc.CreateParagraph();
           p.Alignment = ParagraphAlignment.LEFT;
-          p.SpacingAfter = 300;
+          p.SpacingAfter = 200;
           r = p.CreateRun();
           r.FontSize = 16;
           r.IsBold = true;
@@ -139,14 +158,13 @@ namespace ValutazioneAlunni.MVVMviewmodels
           }
           p = doc.CreateParagraph();
           p.Alignment = ParagraphAlignment.LEFT;
-          p.SpacingAfter = 300;
+          p.SpacingAfter = 400;
           r = p.CreateRun();
           r.FontSize = 12;
           r.FontFamily = font_family;
           r.SetText(sb.ToString());
           chapter_idx++;
         }
-
 
         // Save to disk
         string word_file_name = s.LastName + "_" + s.FirstName + "_" + DateTime.Now.ToString("dd-MM-yyyy_hh-mm") + ".docx";
@@ -156,7 +174,14 @@ namespace ValutazioneAlunni.MVVMviewmodels
         doc.Write(out1);
         out1.Close();
 
-        MessageBoxResult result = MessageBox.Show("Valutazione studente esportata in formato Word!", "Esportazione riuscita!", MessageBoxButton.OK);
+        if (_settings.OpenAfterExport)
+        {
+          Process.Start(complete_word_file_name);
+        }
+        else
+        {
+          MessageBoxResult result = MessageBox.Show("Valutazione studente esportata in formato Word!", "Esportazione riuscita!", MessageBoxButton.OK);
+        }
 
         return true;
       }
@@ -268,6 +293,19 @@ namespace ValutazioneAlunni.MVVMviewmodels
       { 
         _settings.ExportFolder = value;
         RaisePropertyChanged("ExportFolder");
+      }
+    }
+
+    public bool OpenAfterExport
+    {
+      get
+      {
+        return _settings.OpenAfterExport;
+      }
+      set
+      {
+        _settings.OpenAfterExport = value;
+        RaisePropertyChanged("OpenAfterExport");
       }
     }
 
