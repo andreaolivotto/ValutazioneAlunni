@@ -53,12 +53,14 @@ namespace ValutazioneAlunni.MVVMviews
     {
       Messenger.Default.Register<EvaluationScheme>(this, messenger_set_evaluation_scheme, "SetEvaluationScheme");
       Messenger.Default.Register<StudentData>(this, messenger_set_student, "SetCurrentStudent");
+      Messenger.Default.Register<bool>(this, messenger_set_edit_mode, "SetEditMode");
     }
 
     private void messenger_deinit()
     {
       Messenger.Default.Unregister(this, "SetEvaluationScheme");
       Messenger.Default.Unregister(this, "SetCurrentStudent");
+      Messenger.Default.Unregister(this, "SetEditMode");
     }
 
     private void messenger_set_evaluation_scheme(EvaluationScheme scheme)
@@ -71,6 +73,26 @@ namespace ValutazioneAlunni.MVVMviews
     {
       _student = student;
       on_set_student();
+    }
+
+    private void messenger_set_edit_mode(bool edit_mode)
+    {
+      if (_student == null) return;
+      if (_student.EvaluationItems == null) return;
+
+      foreach (StudentEvaluationItem ei in _student.EvaluationItems)
+      {
+        int idx;
+        for (idx = 0; idx < grdEvaluationScheme.Children.Count; idx++)
+        {
+          UIElement ui_element = grdEvaluationScheme.Children[idx];
+          if (ui_element is ComboBox)
+          {
+            ComboBox cmb = (ComboBox)ui_element;
+            cmb.IsEnabled = edit_mode;
+          }
+        }
+      }
     }
 
     #endregion

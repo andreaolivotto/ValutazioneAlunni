@@ -75,10 +75,8 @@
 
       <ScrollViewer Grid.Row="4" Grid.Column="1"
                     Margin="3,15,3,3"
-                    VerticalScrollBarVisibility="Visible"
-                    IsEnabled="{Binding EditMode, Mode=OneWay}">
-        <Grid x:Name="grdEvaluationScheme">
-        </Grid>
+                    VerticalScrollBarVisibility="Visible">
+        <Grid x:Name="grdEvaluationScheme"/>
       </ScrollViewer>
 
       <StackPanel Orientation="Horizontal"

@@ -46,6 +46,11 @@ namespace ValutazioneAlunni.MVVMviewmodels
       Messenger.Default.Send(s, "SetCurrentStudent");
     }
 
+    private void messenger_send_edit_mode(bool edit_mode)
+    {
+      Messenger.Default.Send(edit_mode, "SetEditMode");
+    }
+
     #endregion
 
     #region private functions
@@ -104,6 +109,7 @@ namespace ValutazioneAlunni.MVVMviewmodels
     {
       messenger_send_set_evaluation_scheme();
       messenger_send_set_student(_selected_student);
+      messenger_send_edit_mode(_edit_mode);
     }
 
     private void student_save_new_or_edit()
@@ -251,6 +257,7 @@ namespace ValutazioneAlunni.MVVMviewmodels
       private set
       {
         _edit_mode = value;
+        messenger_send_edit_mode(_edit_mode);
         RaisePropertyChanged("ReadOnlyMode");
         RaisePropertyChanged("EditMode");
       }

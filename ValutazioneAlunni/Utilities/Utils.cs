@@ -30,7 +30,7 @@ namespace ValutazioneAlunni.Utilities
       System.Reflection.Assembly asm;
       asm = System.Reflection.Assembly.GetExecutingAssembly();
 
-      return asm.GetName().Version.Major.ToString() + "." + asm.GetName().Version.Minor.ToString() + "." + asm.GetName().Version.Revision.ToString();
+      return asm.GetName().Version.Major.ToString() + "." + asm.GetName().Version.Minor.ToString() + "." + asm.GetName().Version.Build.ToString();
     }
 
   }
