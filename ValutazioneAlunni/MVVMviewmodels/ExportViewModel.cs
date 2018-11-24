@@ -30,7 +30,30 @@ namespace ValutazioneAlunni.MVVMviewmodels
 
     #endregion
 
+    #region messenger
+
+    private void messenger_init()
+    {
+      Messenger.Default.Register<StudentData>(this, messenger_export_student_word, "ExportStudentWord");
+    }
+
+    private void messenger_export_student_word(StudentData s)
+    {
+    }
+
+    #endregion
+
     #region private functions
+
+    private void choose_export_folder()
+    {
+
+    }
+
+    private void export_student_word(StudentData s)
+    {
+
+    }
 
     #endregion
 
@@ -123,9 +146,55 @@ namespace ValutazioneAlunni.MVVMviewmodels
       }
     }
 
+    public string ExportFolder
+    {
+      get
+      {
+        return _settings.ExportFolder;
+      }
+      private set
+      { 
+        _settings.ExportFolder = value;
+        RaisePropertyChanged("ExportFolder");
+      }
+    }
+
     #endregion
 
     #region commands
+
+    private ICommand _set_export_folder_cmd;
+    public ICommand SetExportFolderCmd
+    {
+      get
+      {
+        if (_set_export_folder_cmd == null)
+        {
+          _set_export_folder_cmd = new RelayCommand(
+              param => this.set_export_folder(),
+              param => this.can_set_export_folder()
+              );
+        }
+        return _set_export_folder_cmd;
+      }
+    }
+
+    private bool can_set_export_folder()
+    {
+      return true;
+    }
+
+    private void set_export_folder()
+    {
+      using (var dialog = new System.Windows.Forms.FolderBrowserDialog())
+      {
+        System.Windows.Forms.DialogResult result = dialog.ShowDialog();
+        if (result == System.Windows.Forms.DialogResult.OK)
+        {
+          ExportFolder = dialog.SelectedPath;
+        }
+      }
+    }
 
     private ICommand _export_all_word_cmd;
     public ICommand ExportAllWordCmd

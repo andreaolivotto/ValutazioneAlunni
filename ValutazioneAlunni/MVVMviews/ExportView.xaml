@@ -19,6 +19,7 @@
       <RowDefinition Height="Auto"/>
       <RowDefinition Height="Auto"/>
       <RowDefinition Height="Auto"/>
+      <RowDefinition Height="Auto"/>
       <RowDefinition/>
       <RowDefinition Height="Auto"/>
     </Grid.RowDefinitions>
@@ -55,10 +56,21 @@
                IsReadOnly="{Binding ReadOnlyMode, Mode=OneWay}"
                Background="{Binding EditMode, Converter={StaticResource FromEditModeToBackgroundColor}}"
                Style="{StaticResource TextFieldValue_Style}"/>
+    
+    <Label Content="Cartella esportazione:" Grid.Row="4" Grid.Column="0" Style="{StaticResource TextFieldLabel_Style}"/>
+    <TextBox Text="{Binding ExportFolder, Mode=OneWay}" Grid.Row="4" Grid.Column="1" 
+             IsReadOnly="True"
+             Background="{Binding true, Converter={StaticResource FromEditModeToBackgroundColor}}"
+             Style="{StaticResource TextFieldValue_Style}"/>
 
     <StackPanel Orientation="Horizontal"
-                  Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"
+                  Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2"
                   HorizontalAlignment="Center">
+
+      <Button Content="Imposta cartella di esportazione" 
+              Width="180"
+              Style="{StaticResource BaseButton_Style}"
+              Command="{Binding SetExportFolderCmd}"/>
 
       <Button Content="Esporta tutti le valutazion in formato Word"       
               Width="250"

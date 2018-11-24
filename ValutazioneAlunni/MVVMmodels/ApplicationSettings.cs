@@ -14,7 +14,8 @@ namespace ValutazioneAlunni.MVVMmodels
   {
     #region public fields
 
-    public string WorkingFolder = "ERR";
+    public string WorkingFolder = "";
+    public string ExportFolder = "";
     public string TeacherFirstName = "Nome";
     public string TeacherLastName = "Cognome";
     public string EvaluationTitle = "Titolo";

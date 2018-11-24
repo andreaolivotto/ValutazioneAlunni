@@ -51,6 +51,11 @@ namespace ValutazioneAlunni.MVVMviewmodels
       Messenger.Default.Send(edit_mode, "SetEditMode");
     }
 
+    private void messenger_send_export_student_word(StudentData s)
+    {
+      Messenger.Default.Send(s, "ExportStudentWord");
+    }
+
     #endregion
 
     #region private functions
