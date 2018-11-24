@@ -90,7 +90,7 @@ namespace ValutazioneAlunni.Data
 
     private string evaluation_scheme_get_file_name()
     {
-      return "RubricaValutativa_rev0.2.xml";
+      return "RubricaValutativa_rev0.3.xml";
     }
 
     private bool evaluation_scheme_load_from_file()
@@ -380,6 +380,7 @@ namespace ValutazioneAlunni.Data
             FileStream file_stream = new FileStream(f, FileMode.Open);
             StudentData s = (StudentData)serializer.Deserialize(file_stream);
             _log.Info("Caricato studente <" + s.ToString() + ">");
+            s.CheckEvaluationScheme(EvaluationScheme);
             Students.Add(s);
           }
         }

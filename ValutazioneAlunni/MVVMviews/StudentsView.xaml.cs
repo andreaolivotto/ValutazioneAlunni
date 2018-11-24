@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ValutazioneAlunni.Data;
 using ValutazioneAlunni.MVVMmodels;
 using ValutazioneAlunni.MVVMutils;
 using ValutazioneAlunni.Utilities;
@@ -192,6 +193,7 @@ namespace ValutazioneAlunni.MVVMviews
           grdEvaluationScheme.RowDefinitions.Add(rd);
           cmb = new ComboBox();
           cmb.Tag = StudentEvaluationItem.EncodeTag(chapter_idx, section_idx);
+          _log.Info("Create combobox tag " + cmb.Tag.ToString());
           cmb.Width = 160;
           cmb.Margin = new Thickness(3, 3, 3, 3);
           cmb.SelectionChanged += Cmb_SelectionChanged;
@@ -206,6 +208,23 @@ namespace ValutazioneAlunni.MVVMviews
           }
           grdEvaluationScheme.Children.Add(cmb);
           Grid.SetRow(cmb, grid_row);
+          grid_row++;
+
+          // Level description
+          rd = new RowDefinition();
+          rd.Height = GridLength.Auto;
+          grdEvaluationScheme.RowDefinitions.Add(rd);
+          tb = new TextBox();
+          tb.Text = "";
+          tb.Tag = StudentEvaluationItem.EncodeTag(chapter_idx, section_idx);
+          _log.Info("Create textbox tag " + tb.Tag.ToString());
+          tb.TextWrapping = TextWrapping.Wrap;
+          tb.IsReadOnly = true;
+          tb.FontStyle = FontStyles.Italic;
+          tb.FontSize = 12;
+          tb.BorderThickness = new Thickness(0);
+          grdEvaluationScheme.Children.Add(tb);
+          Grid.SetRow(tb, grid_row);
           grid_row++;
 
           section_idx++;
@@ -252,10 +271,16 @@ namespace ValutazioneAlunni.MVVMviews
               if (ei.EvalNumber >= 0)
               {
                 cmb.SelectedIndex = ei.EvalNumber;
+                int chapter_idx = 0;
+                int section_idx = 0;
+                StudentEvaluationItem.DecodeTag(ei.Tag, out chapter_idx, out section_idx);
+                string level_description = DataContainer.Instance.EvaluationScheme.GetLevelDescription(chapter_idx, section_idx, ei.EvalNumber);
+                update_level_description(ei.Tag, level_description);
               }
               else
               {
                 cmb.SelectedItem = null;
+                update_level_description(ei.Tag, "");
               }
             }
           }
@@ -263,6 +288,30 @@ namespace ValutazioneAlunni.MVVMviews
       }
 
       _load_student = false;
+    }
+
+    private void update_level_description(string tag, string description)
+    {
+      int idx;
+
+      for (idx = 0; idx < grdEvaluationScheme.Children.Count; idx++)
+      {
+        UIElement ui_element = grdEvaluationScheme.Children[idx];
+        if (ui_element is TextBox)
+        {
+          TextBox txt = (TextBox)ui_element;
+          if (txt.Tag != null)
+          {
+            _log.Info("  textbox " + txt.Tag.ToString());
+            if (txt.Tag.ToString() == tag)
+            {
+              _log.Info("Found textbox " + txt.Tag.ToString());
+              txt.Text = description;
+              return;
+            }
+          }
+        }
+      }
     }
 
     private void update_current_student(ComboBox cmb)
@@ -275,13 +324,22 @@ namespace ValutazioneAlunni.MVVMviews
       {
         if (cmb.Tag.ToString() == ei.Tag)
         {
+          _log.Info("Found combobox " + cmb.Tag.ToString());
           if (cmb.SelectedIndex < 0)
           {
             ei.EvalNumber = -1;
+            update_level_description(ei.Tag, "");
+            _log.Info("  set level -1");
           }
           else
           {
             ei.EvalNumber = cmb.SelectedIndex;
+            _log.Info("  set level " + ei.EvalNumber);
+            int chapter_idx = 0;
+            int section_idx = 0;
+            StudentEvaluationItem.DecodeTag(ei.Tag, out chapter_idx, out section_idx);
+            string level_description = DataContainer.Instance.EvaluationScheme.GetLevelDescription(chapter_idx, section_idx, ei.EvalNumber);
+            update_level_description(ei.Tag, level_description);
           }
         }
       }

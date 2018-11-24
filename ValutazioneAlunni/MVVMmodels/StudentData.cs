@@ -67,6 +67,35 @@ namespace ValutazioneAlunni.MVVMmodels
       load_evaluation_scheme(evaluation_scheme);
     }
 
+    public void CheckEvaluationScheme(EvaluationScheme evaluation_scheme)
+    {
+      int chapter_idx = 0;
+      int section_idx = 0;
+      
+      if (EvaluationSchemeRelease != evaluation_scheme.Release)
+      {
+        foreach (EvaluationChapter chapter in evaluation_scheme.Chapters)
+        {
+          section_idx = 0;
+          foreach (EvaluationSection sec in chapter.Sections)
+          {
+            if (GetEvaluationLevel(chapter_idx, section_idx) <= -2)
+            {
+              StudentEvaluationItem ei = new StudentEvaluationItem();
+              ei.Tag = StudentEvaluationItem.EncodeTag(chapter_idx, section_idx);
+              ei.LastChange = DateTime.Now;
+              ei.EvalNumber = -1;
+              EvaluationItems.Add(ei);
+            }
+            section_idx++;
+          }
+          chapter_idx++;
+        }
+        EvaluationSchemeRelease = evaluation_scheme.Release;
+        EvaluationSchemeDate = evaluation_scheme.DatePubblication.ToString("dd/MM/yyyy");
+      }
+    }
+
     public int GetEvaluationLevel(int chapter_idx, int section_idx)
     {
       try
@@ -81,11 +110,11 @@ namespace ValutazioneAlunni.MVVMmodels
             return ei.EvalNumber;
           }
         }
-        return -1;
+        return -2;
       }
       catch
       {
-        return -1;
+        return -3;
       }
     }
 
