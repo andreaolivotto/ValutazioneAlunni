@@ -203,7 +203,6 @@ namespace ValutazioneAlunni.MVVMviews
             ComboBoxItem i = new ComboBoxItem();
             i.Tag = sec.Levels[idx].Level;
             i.Content = "Livello " + sec.Levels[idx].Level.ToString() + " " + EvaluationLevel.GetLevelDescription(sec.Levels[idx].Level);
-            i.Background = new SolidColorBrush(EvaluationLevel.GetLevelColor(sec.Levels[idx].Level));
             cmb.Items.Add(i);
           }
           grdEvaluationScheme.Children.Add(cmb);
@@ -268,20 +267,8 @@ namespace ValutazioneAlunni.MVVMviews
             ComboBox cmb = (ComboBox)ui_element;
             if (cmb.Tag.ToString() == ei.Tag)
             {
-              if (ei.EvalNumber >= 0)
-              {
-                cmb.SelectedIndex = ei.EvalNumber;
-                int chapter_idx = 0;
-                int section_idx = 0;
-                StudentEvaluationItem.DecodeTag(ei.Tag, out chapter_idx, out section_idx);
-                string level_description = DataContainer.Instance.EvaluationScheme.GetLevelDescription(chapter_idx, section_idx, ei.EvalNumber);
-                update_level_description(ei.Tag, level_description);
-              }
-              else
-              {
-                cmb.SelectedItem = null;
-                update_level_description(ei.Tag, "");
-              }
+              cmb.SelectedIndex = ei.EvalNumber;
+              update_level_description(ei.Tag, ei.EvalNumber);
             }
           }
         }
@@ -290,7 +277,7 @@ namespace ValutazioneAlunni.MVVMviews
       _load_student = false;
     }
 
-    private void update_level_description(string tag, string description)
+    private void update_level_description(string tag, int level)
     {
       int idx;
 
@@ -306,7 +293,20 @@ namespace ValutazioneAlunni.MVVMviews
             if (txt.Tag.ToString() == tag)
             {
               _log.Info("Found textbox " + txt.Tag.ToString());
-              txt.Text = description;
+              if (level < 0)
+              {
+                txt.Text = "";
+                txt.Background = new SolidColorBrush(Color.FromArgb(0,0,0,0));
+              }
+              else
+              {
+                int chapter_idx = 0;
+                int section_idx = 0;
+                StudentEvaluationItem.DecodeTag(tag, out chapter_idx, out section_idx);
+                string level_description = DataContainer.Instance.EvaluationScheme.GetLevelDescription(chapter_idx, section_idx, level);
+                txt.Text = level_description;
+                txt.Background = new SolidColorBrush(EvaluationLevel.GetLevelColor(level));
+              }
               return;
             }
           }
@@ -325,22 +325,8 @@ namespace ValutazioneAlunni.MVVMviews
         if (cmb.Tag.ToString() == ei.Tag)
         {
           _log.Info("Found combobox " + cmb.Tag.ToString());
-          if (cmb.SelectedIndex < 0)
-          {
-            ei.EvalNumber = -1;
-            update_level_description(ei.Tag, "");
-            _log.Info("  set level -1");
-          }
-          else
-          {
-            ei.EvalNumber = cmb.SelectedIndex;
-            _log.Info("  set level " + ei.EvalNumber);
-            int chapter_idx = 0;
-            int section_idx = 0;
-            StudentEvaluationItem.DecodeTag(ei.Tag, out chapter_idx, out section_idx);
-            string level_description = DataContainer.Instance.EvaluationScheme.GetLevelDescription(chapter_idx, section_idx, ei.EvalNumber);
-            update_level_description(ei.Tag, level_description);
-          }
+          ei.EvalNumber = cmb.SelectedIndex;
+          update_level_description(ei.Tag, ei.EvalNumber);
         }
       }
 

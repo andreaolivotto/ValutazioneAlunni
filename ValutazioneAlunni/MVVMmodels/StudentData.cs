@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ValutazioneAlunni.Utilities;
 
 namespace ValutazioneAlunni.MVVMmodels
 {
@@ -43,6 +44,8 @@ namespace ValutazioneAlunni.MVVMmodels
   [Serializable]
   public class StudentData
   {
+    #region public variables
+
     public string EvaluationSchemeRelease;
     public string EvaluationSchemeDate;
 
@@ -53,6 +56,14 @@ namespace ValutazioneAlunni.MVVMmodels
     public string Note;
 
     public List<StudentEvaluationItem> EvaluationItems;
+
+    #endregion
+
+    #region private variables
+
+    private static Log _log = Log.Instance;
+
+    #endregion
 
     #region init and deinit 
 
@@ -71,7 +82,8 @@ namespace ValutazioneAlunni.MVVMmodels
     {
       int chapter_idx = 0;
       int section_idx = 0;
-      
+
+      _log.Info("Studente" + this.ToString() + " verifica versione rubrica valutativa...");
       if (EvaluationSchemeRelease != evaluation_scheme.Release)
       {
         foreach (EvaluationChapter chapter in evaluation_scheme.Chapters)
@@ -79,8 +91,9 @@ namespace ValutazioneAlunni.MVVMmodels
           section_idx = 0;
           foreach (EvaluationSection sec in chapter.Sections)
           {
-            if (GetEvaluationLevel(chapter_idx, section_idx) <= -2)
+            if (GetEvaluationLevel(chapter_idx, section_idx) == EL_NOT_FOUND)
             {
+              _log.Info("  Nuova livello valutativo [" + chapter_idx.ToString() + ", " + section_idx.ToString() + "]");
               StudentEvaluationItem ei = new StudentEvaluationItem();
               ei.Tag = StudentEvaluationItem.EncodeTag(chapter_idx, section_idx);
               ei.LastChange = DateTime.Now;
@@ -96,6 +109,8 @@ namespace ValutazioneAlunni.MVVMmodels
       }
     }
 
+    private const int EL_NOT_FOUND = -2;
+    private const int EL_ERROR = -3;
     public int GetEvaluationLevel(int chapter_idx, int section_idx)
     {
       try
@@ -110,11 +125,11 @@ namespace ValutazioneAlunni.MVVMmodels
             return ei.EvalNumber;
           }
         }
-        return -2;
+        return EL_NOT_FOUND;
       }
       catch
       {
-        return -3;
+        return EL_ERROR;
       }
     }
 

@@ -34,14 +34,14 @@ namespace ValutazioneAlunni.MVVMmodels
     {
       switch (level)
       {
+        case 0:
+          return Color.FromRgb(255, 226, 210);
         case 1:
-          return Color.FromRgb(247, 153, 157);
+          return Color.FromRgb(255, 235, 182);
         case 2:
-          return Color.FromRgb(255, 209, 168);
+          return Color.FromRgb(207, 237, 251);
         case 3:
-          return Color.FromRgb(250, 255, 78);
-        case 4:
-          return Color.FromRgb(158, 255, 112);
+          return Color.FromRgb(229, 239, 199);
         default:
           return Color.FromRgb(244, 244, 244);
       }
